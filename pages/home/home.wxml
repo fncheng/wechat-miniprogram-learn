@@ -1,0 +1,7 @@
+<!--pages/home/home.wxml-->
+<view class="page-body">
+  <view class="page-section page-section-gap">
+    <text>456</text>
+    <web-view src="http://127.0.0.1:50542/" bindmessage="onMessage"></web-view>
+  </view>
+</view>

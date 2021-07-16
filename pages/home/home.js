@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    list:[],
+    value:'1'
   },
 
   /**
@@ -13,6 +14,12 @@ Page({
    */
   onLoad: function (options) {
     console.log(options);
+    this.setData({
+      list: [1,2,3],
+      value: 2,
+      name:'zs'
+    })
+    this.data.value = 123
   },
 
   /**
@@ -26,7 +33,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.data.value = 456
   },
 
   /**

@@ -34,4 +34,10 @@
     <text >图片上传</text>
     <button bind:tap="uploadImage">图片上传</button>
   </view>
+  <view >
+    <text >授权</text>
+    <button open-type="getUserInfo" bindgetuserinfo="getUserInfo">getUserInfo</button>
+    <button bind:tap="getUserProfile">getUserProfile</button>
+    <button open-type="openSetting">openSetting</button>
+  </view>
 </view>

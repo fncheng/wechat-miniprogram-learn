@@ -39,9 +39,9 @@
     "showES6CompileOption": false
   },
   "compileType": "miniprogram",
-  "libVersion": "2.17.3",
+  "libVersion": "2.18.0",
   "appid": "wx88862397bb886228",
-  "projectname": "miniprogram-1",
+  "projectname": "wechat-miniprogram-learn",
   "debugOptions": {
     "hidedInDevtools": []
   },

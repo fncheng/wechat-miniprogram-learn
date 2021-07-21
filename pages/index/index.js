@@ -57,6 +57,57 @@ Page({
       hasUserInfo: true,
     })
   },
+  getSetting(e) {
+    wx.getSetting({
+      withSubscriptions: false,
+      success(res) {
+        console.log('res: ', res)
+      },
+      fail(err) {
+        console.log('err: ', err)
+      },
+      complete(e) {
+        console.log('e: ', e)
+      },
+    })
+  },
+  login() {
+    wx.login({
+      success(res) {
+        console.log('res: ', res)
+        if (res.code) {
+          console.log('登录成功')
+          //发起网络请求
+          // wx.request({
+          //   url: 'https://example.com/onLogin',
+          //   data: {
+          //     code: res.code,
+          //   },
+          // })
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      },
+    })
+  },
+  authorize() {
+    // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.record" 这个 scope
+    wx.getSetting({
+      success(res) {
+        // 未授权用户信息
+        if (!res.authSetting['scope.userInfo']) {
+          wx.authorize({
+            scope: 'scope.record',
+            success() {
+              // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
+              wx.startRecord()
+            },
+          })
+        }
+        console.log('已授权用户信息')
+      },
+    })
+  },
   openSetting(e) {
     console.log('e: ', e)
   },
@@ -73,6 +124,28 @@ Page({
         // tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFilePaths
         console.log(res)
+      },
+    })
+  },
+  navigateTo() {
+    wx.navigateTo({
+      url: '/pages/home/home',
+      success(res) {
+        console.log('res: ', res)
+      },
+      fail(err) {
+        console.log('err: ', err)
+      },
+    })
+  },
+  redirectTo() {
+    wx.redirectTo({
+      url: '/pages/home/home',
+      success(res) {
+        console.log('res: ', res)
+      },
+      fail(err) {
+        console.log('err: ', err)
       },
     })
   },

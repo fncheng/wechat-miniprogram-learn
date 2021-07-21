@@ -38,6 +38,14 @@
     <text >授权</text>
     <button open-type="getUserInfo" bindgetuserinfo="getUserInfo">getUserInfo</button>
     <button bind:tap="getUserProfile">getUserProfile</button>
+    <button bind:tap="getSetting">getSetting</button>
     <button open-type="openSetting">openSetting</button>
+    <button bind:tap="login">login</button>
+    <button bind:tap="authorize">authorize</button>
+  </view>
+  <view>
+    <text>路由</text>
+    <button bind:tap="navigateTo">navigateTo</button>
+    <button bind:tap="redirectTo">redirectTo</button>
   </view>
 </view>

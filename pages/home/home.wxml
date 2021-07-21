@@ -2,8 +2,7 @@
 <view class="page-body">
   <view class="page-section page-section-gap">
     <text>{{value}}</text>
-
-    <view wx:for="{{list}}">
+    <view wx:for="{{list}}" wx:key="index">
       {{index}}: {{item}}
     </view>
   </view>

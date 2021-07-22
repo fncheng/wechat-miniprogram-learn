@@ -129,7 +129,7 @@ Page({
   },
   navigateTo() {
     wx.navigateTo({
-      url: '/pages/home/home',
+      url: '/pages/vant/vant',
       success(res) {
         console.log('res: ', res)
       },

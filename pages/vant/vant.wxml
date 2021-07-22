@@ -1,0 +1,32 @@
+<!-- pages/vant/vant.wxml -->
+<text>pages/vant/vant.wxml</text>
+<view>
+  <van-button type="primary" block size="normal" bind:click="showPopup">主要按钮</van-button>
+  <van-popup show="{{ show }}" position="bottom" bind:close="onClose" custom-style="height: 40%">
+    <van-datetime-picker
+      type="datetime"
+      value="{{ currentDate }}"
+      min-date="{{ minDate }}"
+      max-date="{{ maxDate }}"
+      bind:input="onInput"
+      formatter="{{ formatter }}"
+      bind:change="bindChange"
+    >
+    </van-datetime-picker>
+  </van-popup>
+  <view class="section">
+    <view class="section__title">日期选择器</view>
+    <picker
+      mode="date"
+      value="{{ date }}"
+      start="2015-09-01"
+      end="2023-09-01"
+      bindchange="bindDateChange"
+    >
+      <view class="picker"> 当前选择: {{ date }} </view>
+    </picker>
+  </view>
+  <view >
+    <button bind:tap="bindClick">振动</button>
+  </view>
+</view>

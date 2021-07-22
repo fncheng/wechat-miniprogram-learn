@@ -23,6 +23,12 @@
           "pathName": "pages/index/index",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/vant/vant",
+          "pathName": "pages/vant/vant",
+          "query": "",
+          "scene": null
         }
       ]
     }

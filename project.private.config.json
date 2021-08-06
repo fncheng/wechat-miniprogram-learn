@@ -29,6 +29,12 @@
           "pathName": "pages/vant/vant",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/global/global",
+          "pathName": "pages/global/global",
+          "query": "",
+          "scene": null
         }
       ]
     }

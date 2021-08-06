@@ -2,7 +2,7 @@
 <text>pages/vant/vant.wxml</text>
 <view>
   <van-button type="primary" block size="normal" bind:click="showPopup">主要按钮</van-button>
-  <van-popup show="{{ show }}" position="bottom" bind:close="onClose" custom-style="height: 40%">
+  <!-- <van-popup show="{{ show }}" position="bottom" bind:close="onClose" custom-style="height: 40%">
     <van-datetime-picker
       type="datetime"
       value="{{ currentDate }}"
@@ -13,7 +13,7 @@
       bind:change="bindChange"
     >
     </van-datetime-picker>
-  </van-popup>
+  </van-popup> -->
   <view class="section">
     <view class="section__title">日期选择器</view>
     <picker
@@ -26,7 +26,28 @@
       <view class="picker"> 当前选择: {{ date }} </view>
     </picker>
   </view>
-  <view >
+  <view>
     <button bind:tap="bindClick">振动</button>
+  </view>
+  <view>
+    <van-loading type="spinner"></van-loading>
+  </view>
+  <view class="page">
+    <view class="page__hd">
+      <view class="page__title">Loading</view>
+      <view class="page__desc">加载中</view>
+    </view>
+    <view class="page__bd">
+      <mp-loading type="circle"></mp-loading>
+      <!-- <mp-loading type="circle" tips="{{tips}}"></mp-loading> -->
+      <mp-loading
+        duration="{{ 900 }}"
+        ext-class="demo0"
+        type="dot-gray"
+        show="{{ show }}"
+        animated="{{ animated }}"
+      ></mp-loading>
+      <!-- <mp-loading type="dot-white" ext-class="demo1"></mp-loading> -->
+    </view>
   </view>
 </view>

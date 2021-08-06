@@ -14,6 +14,7 @@ Page({
    */
   onLoad: function (options) {
     console.log(options);
+    console.log('跳转完成');
     this.setData({
       list: [1,2,3],
       value: 2,

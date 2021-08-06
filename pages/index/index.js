@@ -129,18 +129,25 @@ Page({
   },
   navigateTo() {
     wx.navigateTo({
-      url: '/pages/vant/vant',
-      success(res) {
-        console.log('res: ', res)
+      url: `/pages/vant/vant?name='zs'&age=18`,
+      events: {
+        // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+        acceptDataFromOpenedPage: function(data) {
+          console.log(data)
+        },
+        someEvent: function(data) {
+          console.log(data)
+        }
       },
-      fail(err) {
-        console.log('err: ', err)
-      },
+      success: function(res) {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('acceptDataFromOpenerPage', { data: 'test' })
+      }
     })
   },
   redirectTo() {
     wx.redirectTo({
-      url: '/pages/home/home',
+      url: `/pages/home/home`,
       success(res) {
         console.log('res: ', res)
       },

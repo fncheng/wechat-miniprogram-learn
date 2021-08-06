@@ -1,0 +1,10 @@
+<!--pages/global/global.wxml-->
+<text>pages/global/global.wxml</text>
+
+<view>
+  <button bind:tap="bindClick">NavigationBarLoading</button>
+</view>
+
+<view>
+  <button bind:tap="bindClick1">NavigationBarLoading</button>
+</view>

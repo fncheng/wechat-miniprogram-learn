@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    show: false,
+    // show: false,
     minDate: new Date().getTime(),
     maxDate: new Date(2023, 10, 1).getTime(),
     currentDate: new Date().getTime(),
@@ -21,13 +21,23 @@ Page({
       }
       return value;
     },
+    tips: '请稍后',
+    show: true,
+    animated: true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log('options: ', options);
+    const eventChannel = this.getOpenerEventChannel()
+    eventChannel.emit('acceptDataFromOpenedPage', {data: 'acceptDataFromOpenedPage'});
+    eventChannel.emit('someEvent', {data: 'someEvent'});
+    // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
+    eventChannel.on('acceptDataFromOpenerPage', function(data) {
+      console.log(data)
+    })
   },
 
   /**
@@ -41,7 +51,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.timer = setInterval(() => {
+      this.setData({
+        show: !this.data.show
+      })
+    }, 2000)
   },
 
   /**
@@ -55,7 +69,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    clearInterval(this.timer)
   },
 
   /**
@@ -82,6 +96,11 @@ Page({
   showPopup() {
     console.log('show');
     this.setData({ show: true });
+    // wx.showToast({
+    //   title: '成功',
+    //   icon: 'success',
+    //   duration: 2000
+    // })
   },
 
   onClose() {
@@ -113,5 +132,9 @@ Page({
   },
   bindChange(e){
     console.log(123);
+  },
+  bindLoading(e){
+    console.log(e);
+
   }
 })

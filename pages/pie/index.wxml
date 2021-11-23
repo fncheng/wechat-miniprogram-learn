@@ -1,0 +1,13 @@
+<!--index.wxml-->
+123
+<view class="pie-container">
+  <ec-canvas
+    id="mychart-dom-pie"
+    canvas-id="mychart-pie"
+    ec="{{ ec }}"
+  ></ec-canvas>
+</view>
+
+<view class="pie-container">
+  <e-pie option="{{option}}"></e-pie>
+</view>

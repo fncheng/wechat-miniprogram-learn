@@ -4,7 +4,8 @@
     "pages/logs/logs",
     "pages/home/home",
     "pages/vant/vant",
-    "pages/global/global"
+    "pages/global/global",
+    "pages/pie/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

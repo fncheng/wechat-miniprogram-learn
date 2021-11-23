@@ -35,6 +35,12 @@
           "pathName": "pages/global/global",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "饼图",
+          "pathName": "pages/pie/index",
+          "query": "",
+          "scene": null
         }
       ]
     }

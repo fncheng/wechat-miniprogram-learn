@@ -48,4 +48,12 @@
     <button bind:tap="navigateTo">navigateTo</button>
     <button bind:tap="redirectTo">redirectTo</button>
   </view>
+  <view>
+    <text>自定义组件</text>
+    <comp bind:mytap="bindMyTap"></comp>
+  </view>
+  <view>
+    <text>发起请求</text>
+    <button bind:tap="onClick">点击发起请求</button>
+  </view>
 </view>

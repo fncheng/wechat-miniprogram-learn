@@ -1,0 +1,2 @@
+<!--component/comp/comp.wxml-->
+<button bind:tap="onTap">Button</button>

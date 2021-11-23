@@ -9,8 +9,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     canIUseGetUserProfile: false,
-    canIUseOpenData:
-      wx.canIUse('open-data.type.userAvatarUrl') &&
+    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') &&
       wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
   },
   // 事件处理函数
@@ -132,16 +131,18 @@ Page({
       url: `/pages/vant/vant?name='zs'&age=18`,
       events: {
         // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
-        acceptDataFromOpenedPage: function(data) {
+        acceptDataFromOpenedPage: function (data) {
           console.log(data)
         },
-        someEvent: function(data) {
+        someEvent: function (data) {
           console.log(data)
         }
       },
-      success: function(res) {
+      success: function (res) {
         // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit('acceptDataFromOpenerPage', { data: 'test' })
+        res.eventChannel.emit('acceptDataFromOpenerPage', {
+          data: 'test'
+        })
       }
     })
   },
@@ -156,4 +157,21 @@ Page({
       },
     })
   },
+
+  bindMyTap(e) {
+    console.log('bindMyTap', e);
+  },
+  onClick(e) {
+    console.log(e);
+    wx.request({
+      url: 'https://baidu.com',
+      data: {
+        name: 'zs'
+      },
+      success(res) {
+        console.log('success', res);
+      },
+      method: 'GET'
+    })
+  }
 })

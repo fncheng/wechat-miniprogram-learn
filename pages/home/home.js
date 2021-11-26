@@ -5,8 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    active: 'b',
     list:[],
-    value:'1'
+    value:'1',
+    boolean: false
   },
 
   /**
@@ -73,5 +75,8 @@ Page({
   },
   onMessage(e){
     console.log('收到消息', e);
+  },
+  tabChange({detail}) {
+    console.log('e111: ', detail);
   }
 })

@@ -1,5 +1,8 @@
 <!--index.wxml-->
-123
+<button bind:tap="onTap">点击传option</button>
+<view>{{ a }}</view>
+<view>{{ b }}</view>
+<view>{{ sum }}</view>
 <view class="pie-container">
   <ec-canvas
     id="mychart-dom-pie"
@@ -9,5 +12,5 @@
 </view>
 
 <view class="pie-container">
-  <e-pie option="{{option}}"></e-pie>
+  <e-pie a="{{ a }}" data="{{ pieData }}"></e-pie>
 </view>

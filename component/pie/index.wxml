@@ -1,2 +1,5 @@
 <!--index.wxml-->
+<view>{{ a }}</view>
+<view>{{ b }}</view>
+<view>{{ sum }}</view>
 <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}"></ec-canvas>

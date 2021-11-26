@@ -2,8 +2,16 @@
 <view class="page-body">
   <view class="page-section page-section-gap">
     <text>{{value}}</text>
-    <view wx:for="{{list}}" wx:key="index">
-      {{index}}: {{item}}
-    </view>
+    <view wx:for="{{list}}" wx:key="index">{{index}}: {{item}}</view>
   </view>
+  <view>
+    <view>123</view>
+    <view wx:if="{{boolean}}">true</view>
+    <view wx:else>false</view>
+  </view>
+  <van-tabs active="{{active}}" bind:click="tabChange">
+    <van-tab title="标签 1" name="a">内容 1</van-tab>
+    <van-tab title="标签 2" name="b">内容 2</van-tab>
+    <van-tab title="标签 3" name="c">内容 3</van-tab>
+  </van-tabs>
 </view>

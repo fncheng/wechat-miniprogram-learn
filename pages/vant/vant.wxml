@@ -13,7 +13,7 @@
       bind:change="bindChange"
     >
     </van-datetime-picker>
-  </van-popup> -->
+  </van-popup>-->
   <view class="section">
     <view class="section__title">日期选择器</view>
     <picker
@@ -23,7 +23,7 @@
       end="2023-09-01"
       bindchange="bindDateChange"
     >
-      <view class="picker"> 当前选择: {{ date }} </view>
+      <view class="picker">当前选择: {{ date }}</view>
     </picker>
   </view>
   <view>
@@ -49,5 +49,21 @@
       ></mp-loading>
       <!-- <mp-loading type="dot-white" ext-class="demo1"></mp-loading> -->
     </view>
+  </view>
+  <view>
+    <van-cell-group>
+      <van-field value="{{ username }}" label="用户名" placeholder="请输入用户名" error />
+      <van-field
+        value="{{ phone }}"
+        label="手机号"
+        placeholder="请输入手机号"
+        error-message="手机号格式错误"
+        border="{{ false }}"
+      />
+    </van-cell-group>
+  </view>
+  <view>
+    <text>图片上传</text>
+    <van-uploader file-list="{{ fileList }}" bind:after-read="afterRead" />
   </view>
 </view>

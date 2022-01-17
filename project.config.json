@@ -32,6 +32,7 @@
     },
     "enableEngineNative": false,
     "useIsolateContext": true,
+    "userConfirmedUseIsolateContext": true,
     "userConfirmedBundleSwitch": false,
     "packNpmManually": true,
     "packNpmRelationList": [
@@ -41,12 +42,13 @@
       }
     ],
     "minifyWXSS": true,
+    "disableUseStrict": false,
+    "minifyWXML": true,
     "showES6CompileOption": false,
-    "useSummerCompiler": false,
-    "minifyWXML": true
+    "useCompilerPlugins": false
   },
   "compileType": "miniprogram",
-  "libVersion": "2.16.1",
+  "libVersion": "2.17.0",
   "appid": "wx88862397bb886228",
   "projectname": "wechat-miniprogram-learn",
   "debugOptions": {

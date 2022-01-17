@@ -2,25 +2,42 @@
 # yarn lockfile v1
 
 
+"@types/wechat-miniprogram@^3.4.0":
+  version "3.4.0"
+  resolved "https://registry.npmmirror.com/@types/wechat-miniprogram/download/@types/wechat-miniprogram-3.4.0.tgz#d743d5b3c17bd531c2c178ea1fe9d92a0b23bcd0"
+  integrity sha1-10PVs8F71THCwXjqH+nZKgsjvNA=
+
 "@vant/weapp@^1.7.2":
-  "integrity" "sha1-+0BI8zX9lGWF0fEtWlvrUvvJGpw="
-  "resolved" "https://registry.nlark.com/@vant/weapp/download/@vant/weapp-1.7.2.tgz"
-  "version" "1.7.2"
+  version "1.10.2"
+  resolved "https://registry.npmmirror.com/@vant/weapp/download/@vant/weapp-1.10.2.tgz#013fbf2fdc6d59d9e92bb82a0f772f032fb52945"
+  integrity sha512-caqA0xQxM4lMRncFsRPPVMDdEzUBCJ4xdFXuKReXpEU3qwnVIP/WIjVDIi7mWyS7xqz8C9WfSW5JL4PrlSq31w==
 
-"fast-deep-equal@^2.0.1":
-  "integrity" "sha1-ewUhjd+WZ79/Nwv3/bLLFf3Qqkk="
-  "resolved" "https://registry.npmmirror.com/fast-deep-equal/download/fast-deep-equal-2.0.1.tgz"
-  "version" "2.0.1"
+fast-deep-equal@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.npmmirror.com/fast-deep-equal/download/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
+  integrity sha1-ewUhjd+WZ79/Nwv3/bLLFf3Qqkk=
 
-"miniprogram-computed@^4.2.1":
-  "integrity" "sha1-jDm0+TXdIJxmEMdl1X62IL9NrJQ="
-  "resolved" "https://registry.npmmirror.com/miniprogram-computed/download/miniprogram-computed-4.2.1.tgz"
-  "version" "4.2.1"
+miniprogram-computed@^4.2.1:
+  version "4.3.4"
+  resolved "https://registry.npmmirror.com/miniprogram-computed/download/miniprogram-computed-4.3.4.tgz#7382ac5bd578348d4ce0382fe754b54d22228e88"
+  integrity sha512-9Lr4EHB7Jwz3vpTsn0YqVeCyX1vJsdRIbbIfMt7hx54WKOvHYjlwR8Uuw4Hx21BOek8oqwd6+E7bRN3a7FFP1A==
   dependencies:
-    "fast-deep-equal" "^2.0.1"
-    "rfdc" "^1.1.4"
+    fast-deep-equal "^2.0.1"
+    rfdc "^1.1.4"
 
-"rfdc@^1.1.4":
-  "integrity" "sha1-0LfEQasnINBdxM8m4ByJYx2doIs="
-  "resolved" "https://registry.npmmirror.com/rfdc/download/rfdc-1.3.0.tgz"
-  "version" "1.3.0"
+mobx-miniprogram-bindings@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.npmmirror.com/mobx-miniprogram-bindings/download/mobx-miniprogram-bindings-2.1.4.tgz#504929e946c50cbe5f32d9c870225ba272a1c282"
+  integrity sha1-UEkp6UbFDL5fMtnIcCJbonKhwoI=
+  dependencies:
+    "@types/wechat-miniprogram" "^3.4.0"
+
+mobx-miniprogram@^4.13.2:
+  version "4.13.2"
+  resolved "https://registry.npmmirror.com/mobx-miniprogram/download/mobx-miniprogram-4.13.2.tgz#b72c03fd5ad1f1b9022c422f9c88a47d1e5f8868"
+  integrity sha1-tywD/VrR8bkCLEIvnIikfR5fiGg=
+
+rfdc@^1.1.4:
+  version "1.3.0"
+  resolved "https://registry.npmmirror.com/rfdc/download/rfdc-1.3.0.tgz#d0b7c441ab2720d05dc4cf26e01c89631d9da08b"
+  integrity sha1-0LfEQasnINBdxM8m4ByJYx2doIs=

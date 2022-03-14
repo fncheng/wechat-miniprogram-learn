@@ -1,0 +1,77 @@
+/* pages/meetManage/index.wxss */
+page {
+  background-color: #F7FCFF;
+}
+
+.van-search {
+  padding-left: 10rpx !important;
+  padding-right: 10rpx !important;
+}
+
+.meeting-card {
+  height: 5rem;
+  margin-top: 0.5rem;
+  background-color: #fff;
+}
+
+.meeting-org {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.meeting-status {
+  font-size: 0.88rem;
+}
+
+.meeting-time {
+  font-size: 0.88rem;
+  color: #333333;
+  font-weight: 300;
+}
+
+.meeting-action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4.25rem;
+  height: 1.56rem;
+  font-size: 0.88rem;
+  background-color: rgba(98, 120, 254, 0.75);
+  border-radius: 0.81rem;
+}
+
+.meeting-modal {
+  height: 32rem;
+  padding-top: 1.2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+}
+
+.meeting-modal .title {
+  margin-bottom: 1.25rem;
+  color: rgba(98, 120, 254, 1);
+}
+
+.meeting-modal-title {
+  margin-bottom: 0.5rem;
+  color: rgb(48, 23, 23);
+}
+
+.metting-modal-sheet {}
+
+.meeting-modal-action {}
+
+.product-sense {
+  height: 36rem;
+  padding: 0.75rem 1.5rem;
+}
+
+.product-sense-item {
+  height: 2.5rem;
+  line-height: 2.5;
+}
+
+.button-action {
+  width: 48%;
+}

@@ -1,0 +1,160 @@
+<van-tabs active="{{ active }}" bind:change="onChange">
+  <van-tab title="全部">全部</van-tab>
+  <van-tab title="未开始">未开始</van-tab>
+  <van-tab title="已反馈">已反馈</van-tab>
+</van-tabs>
+
+<view>
+  <van-search class="w-full" use-left-icon-slot="{{ true }}"
+    use-right-icon-slot="{{true}}" value="{{ value }}"
+    placeholder="搜索（医生、医院、产品）">
+    <van-icon slot="right-icon" name="search" />
+  </van-search>
+</view>
+
+<view>
+  <view class="flex flex-col justify-around px-3 py-2 meeting-card">
+    <view class="flex justify-between">
+      <view class="meeting-org">复旦大学附属华山医院</view>
+      <view class="meeting-status">已申请</view>
+    </view>
+    <view class="flex justify-between">
+      <view class="meeting-time">3月3日 心内科 张主任 科室会</view>
+      <view class="meeting-action">
+        执行反馈
+      </view>
+    </view>
+  </view>
+  <view class="flex flex-col justify-around px-3 py-2 meeting-card">
+    <view class="flex justify-between">
+      <view class="meeting-org">复旦大学附属华山医院</view>
+      <view class="meeting-status">已申请</view>
+    </view>
+    <view class="flex justify-between">
+      <view class="meeting-time">3月3日 心内科 张主任 科室会</view>
+      <view class="meeting-action">
+        执行反馈
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 会议反馈 -->
+<van-action-sheet show="{{ true }}">
+  <view class="meeting-modal flex flex-col">
+    <view class="title flex justify-center items-center">
+      会议执行反馈
+    </view>
+    <view class="meeting-modal-title">3月3日十院心内科张主任科室会</view>
+    <view class="metting-modal-sheet">
+      <van-cell-group>
+        <van-field border="{{true}}" label="会议实际时间" value="{{ value }}"
+          placeholder="请输入用户名" border="{{ false }}" bind:change="onChange">
+          <view slot="input" class="flex-1">
+            <view class="flex justify-start">
+              <picker mode="date">
+                <view class="mr-8">
+                  <text>{{ currentDate }}</text>
+                  <van-icon name="calendar-o" />
+                </view>
+              </picker>
+              <picker mode="time">
+                <view>
+                  <text>{{ currentTime }}</text>
+                  <van-icon name="notes-o" />
+                </view>
+              </picker>
+            </view>
+          </view>
+        </van-field>
+        <van-field label="实际劳务费用" value="{{ value }}" placeholder="请输入用户名"
+          border="{{ false }}" bind:change="onChange" />
+        <van-field label="实际餐费" type="digit" value="{{ value }}" placeholder="元"
+          placeholder-style="text-align: right" border="{{ false }}"
+          bind:change="onChange" />
+        <van-field label="会中执行清单" value="{{ value }}" placeholder="元"
+          placeholder-style="text-align: right" border="{{ false }}"
+          bind:change="onChange">
+          <view slot="input" class="flex-1">
+            <picker mode="selector" range="{{ [1,2,3] }}">请选择</picker>
+          </view>
+        </van-field>
+        <van-field label="实际参会人员" value="{{ value }}" placeholder="请输入用户名"
+          border="{{ false }}" bind:change="onChange" />
+      </van-cell-group>
+    </view>
+    <view class="flex justify-around">
+      <view>参会者</view>
+      <view>产品观念</view>
+      <view>跟进</view>
+    </view>
+    <view>
+      <view class="flex justify-around">
+        <view class="flex justify-center">医生1</view>
+        <view class="flex justify-center">
+          <van-button>产品观念</van-button>
+        </view>
+        <view class="flex justify-center">
+          <checkbox></checkbox>
+        </view>
+      </view>
+    </view>
+    <view class="meeting-modal-action flex justify-between">
+      <view class="button-action">
+        <button>取消</button>
+      </view>
+      <view class="button-action">
+        <button>确认</button>
+      </view>
+    </view>
+  </view>
+</van-action-sheet>
+
+<!-- 会议执行清单 -->
+<van-action-sheet show="{{ false }}" description="会议执行清单">
+  <!-- 此处遍历 -->
+  <view class="flex flex-col">
+    <view class="flex">
+      <view>
+        <van-radio></van-radio>
+      </view>
+      <view>会议当日提醒讲者会议时间</view>
+    </view>
+    <view><button>完成</button></view>
+  </view>
+</van-action-sheet>
+
+<!-- 产品观念 -->
+<van-action-sheet show="{{ false }}">
+  <view class="product-sense">
+    <view class="flex justify-around">
+      <view class="flex-1">产品观念</view>
+      <view class="w-28 flex justify-around">
+        <text>同意</text>
+        <text>反对</text>
+      </view>
+    </view>
+    <view class="flex product-sense-item">
+      <view class="flex-1">HCY危害</view>
+      <view>
+        <!-- <van-radio-group value="{{ radio }}" class="flex justify-around"
+          custom-class="flex justify-around">
+          <van-radio name="1">单选框 1</van-radio>
+          <van-radio name="2">单选框 2</van-radio>
+        </van-radio-group> -->
+        <radio-group class="w-28 flex justify-around">
+          <radio value="1"></radio>
+          <radio value="0"></radio>
+        </radio-group>
+      </view>
+    </view>
+    <view class="meeting-modal-action flex justify-between">
+      <view class="button-action">
+        <button>取消</button>
+      </view>
+      <view class="button-action">
+        <button>确认</button>
+      </view>
+    </view>
+  </view>
+</van-action-sheet>

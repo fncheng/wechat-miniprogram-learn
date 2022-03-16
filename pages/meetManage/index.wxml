@@ -40,7 +40,7 @@
 </view>
 
 <!-- 会议反馈 -->
-<van-action-sheet show="{{ true }}">
+<van-action-sheet show="{{ false }}">
   <view class="meeting-modal flex flex-col">
     <view class="title flex justify-center items-center">
       会议执行反馈

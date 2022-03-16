@@ -1,0 +1,52 @@
+page {
+  background-color: #F7FCFF;
+}
+
+.van-search {
+  padding-left: 10rpx !important;
+  padding-right: 10rpx !important;
+}
+
+.xiefang-card {
+  height: 7rem;
+  margin-top: 0.5rem;
+  background-color: #fff;
+}
+
+.xiefang-name {
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+.xiefang-address {
+  color: #333333;
+  font-weight: normal;
+}
+
+.xiefang-status {
+  font-size: 0.88rem;
+}
+
+.xiefang-people {
+  font-size: 0.88rem;
+  color: #666666;
+  font-weight: 300;
+}
+
+.xiefang-time {
+  font-size: 0.88rem;
+  color: #666666;
+  font-weight: 300;
+}
+
+.xiefang-action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4.25rem;
+  height: 1.56rem;
+  font-size: 0.88rem;
+  color: #fff;
+  background-color: rgba(98, 120, 254, 0.75);
+  border-radius: 0.81rem;
+}

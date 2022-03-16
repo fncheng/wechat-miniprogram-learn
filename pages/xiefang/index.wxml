@@ -1,0 +1,74 @@
+<!--pages/xiefang/index.wxml-->
+<van-tabs active="{{ active }}" bind:change="onChange">
+  <van-tab title="我的协访计划">全部</van-tab>
+  <van-tab title="我下属的拜访计划">未开始</van-tab>
+</van-tabs>
+
+<view>
+  <van-search class="w-full" use-left-icon-slot="{{ true }}"
+    use-right-icon-slot="{{true}}" value="{{ value }}"
+    placeholder="搜索（医生、医院、产品）">
+    <van-icon slot="right-icon" name="search" />
+  </van-search>
+</view>
+
+<view>
+  <view class="flex flex-col justify-around px-3 py-2 xiefang-card">
+    <view class="flex justify-between">
+      <view class="xiefang-org">复旦大学附属华山医院</view>
+      <view class="xiefang-status">已提交</view>
+    </view>
+    <view class="flex justify-between">
+      <view class="xiefang-time">3月3日 心内科 张主任 科室会</view>
+      <view class="xiefang-action">
+        执行反馈
+      </view>
+    </view>
+  </view>
+  <view class="flex flex-col justify-around px-3 py-2 xiefang-card">
+    <view class="flex justify-between items-end">
+      <view class="xiefang-name">杨琪</view>
+      <view class="xiefang-address">复旦大学附属华山医院</view>
+      <view class="xiefang-status">已审核</view>
+    </view>
+    <view class="flex justify-between leading-loose">
+      <view class="xiefang-people">被协访者：张三</view>
+      <view class="xiefang-time">计划协访时间：2022-02-22 16:00</view>
+    </view>
+    <view class="flex justify-end leading-loose">
+      <view class="xiefang-action">
+        审批
+      </view>
+    </view>
+  </view>
+</view>
+
+<van-action-sheet show="{{ true }}" description="创建协访计划">
+  <view>拜访计划详情</view>
+  <view>
+    <van-field label="医院" value="{{ value }}" placeholder="请输入用户名"
+      border="{{ true }}" />
+    <van-field label="医生" value="{{ value }}" placeholder="请输入用户名"
+      border="{{ true }}" />
+    <van-field label="产品" value="{{ value }}" placeholder="请输入用户名"
+      border="{{ true }}" />
+    <van-field label="病例潜力" value="{{ value }}" placeholder="请输入用户名"
+      border="{{ true }}" />
+    <van-field label="目前病例" value="{{ value }}" placeholder="请输入用户名"
+      border="{{ true }}" />
+    <van-field label="目标病例" value="{{ value }}" placeholder="请输入用户名"
+      border="{{ true }}" />
+    <van-cell title="拜访目的" is-link border="{{ true }}" />
+    <van-cell title="客户关系" is-link border="{{ true }}" />
+    <van-field label="产品观念" value="{{ value }}" placeholder="请输入用户名"
+      border="{{ true }}" />
+    <van-field label="拜访计划开始时间" value="{{ value }}" placeholder="请输入用户名"
+      border="{{ true }}" />
+  </view>
+  <view>协访计划</view>
+  <view>
+    <van-cell title="协访目的" is-link border="{{ true }}" />
+    <van-field label="协访计划开始时间" value="{{ value }}" placeholder="请输入用户名"
+      border="{{ true }}" />
+  </view>
+</van-action-sheet>

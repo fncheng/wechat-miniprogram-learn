@@ -1,0 +1,16 @@
+/* pages/xiefangResult/index.wxss */
+.result-item {
+  height: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(230, 247, 255, 1);
+}
+
+.result-item-content {
+  flex: 1;
+}
+
+.result-item-action {
+  width: 30%;
+}

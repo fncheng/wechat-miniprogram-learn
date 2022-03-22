@@ -50,3 +50,18 @@ page {
   background-color: rgba(98, 120, 254, 0.75);
   border-radius: 0.81rem;
 }
+
+.create-xf {
+  width: 6rem;
+}
+
+.xiefang-dialog {
+  z-index: 9999;
+}
+
+.xiefang-checkbox {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

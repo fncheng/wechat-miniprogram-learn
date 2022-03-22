@@ -1,8 +1,9 @@
 <!--pages/xiefang/index.wxml-->
-<van-tabs active="{{ active }}" bind:change="onChange">
-  <van-tab title="我的协访计划">全部</van-tab>
-  <van-tab title="我下属的拜访计划">未开始</van-tab>
+<van-tabs active="{{ activeTab }}" bind:change="onChangeTab">
+  <van-tab title="我的协访计划" name="0"></van-tab>
+  <van-tab title="我下属的拜访计划" name="1"></van-tab>
 </van-tabs>
+
 
 <view>
   <van-search class="w-full" use-left-icon-slot="{{ true }}"
@@ -12,16 +13,21 @@
   </van-search>
 </view>
 
-<view>
+<!-- 我的协访计划 -->
+<view wx:if="{{activeTab === '0'}}">
   <view class="flex flex-col justify-around px-3 py-2 xiefang-card">
-    <view class="flex justify-between">
-      <view class="xiefang-org">复旦大学附属华山医院</view>
-      <view class="xiefang-status">已提交</view>
+    <view class="flex justify-between items-end">
+      <view class="xiefang-name">杨琪</view>
+      <view class="xiefang-address">复旦大学附属华山医院</view>
+      <view class="xiefang-status">已审核</view>
     </view>
-    <view class="flex justify-between">
-      <view class="xiefang-time">3月3日 心内科 张主任 科室会</view>
+    <view class="flex justify-between leading-loose">
+      <view class="xiefang-people">被协访者：张三</view>
+      <view class="xiefang-time">计划协访时间：2022-02-22 16:00</view>
+    </view>
+    <view class="flex justify-end leading-loose">
       <view class="xiefang-action">
-        执行反馈
+        审批
       </view>
     </view>
   </view>
@@ -43,32 +49,122 @@
   </view>
 </view>
 
-<van-action-sheet show="{{ true }}" description="创建协访计划">
-  <view>拜访计划详情</view>
-  <view>
-    <van-field label="医院" value="{{ value }}" placeholder="请输入用户名"
-      border="{{ true }}" />
-    <van-field label="医生" value="{{ value }}" placeholder="请输入用户名"
-      border="{{ true }}" />
-    <van-field label="产品" value="{{ value }}" placeholder="请输入用户名"
-      border="{{ true }}" />
-    <van-field label="病例潜力" value="{{ value }}" placeholder="请输入用户名"
-      border="{{ true }}" />
-    <van-field label="目前病例" value="{{ value }}" placeholder="请输入用户名"
-      border="{{ true }}" />
-    <van-field label="目标病例" value="{{ value }}" placeholder="请输入用户名"
-      border="{{ true }}" />
+<!-- 我下属的拜访计划 -->
+<view wx:if="{{activeTab === '1'}}">
+  <view class="flex flex-col justify-around px-3 py-2 xiefang-card">
+    <view class="flex justify-between items-end">
+      <view class="xiefang-name">杨琪</view>
+      <view class="xiefang-address">复旦大学附属华山医院</view>
+      <view class="xiefang-status">已审核</view>
+    </view>
+    <view class="flex justify-between leading-loose">
+      <view class="xiefang-people">代表：张三</view>
+      <view class="xiefang-time">拜访计划开始时间：2022-02-22 16:00</view>
+    </view>
+    <view class="flex justify-end leading-loose">
+      <view class="xiefang-action create-xf" bindtap="createXf">
+        创建协访计划
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 创建拜访计划表单 -->
+<van-action-sheet show="{{ create_xf_show }}" description="创建协访计划">
+  <view class="px-8">拜访计划详情</view>
+  <view class="px-4">
+    <van-field always-embed label="医院" value="{{ createXfQuery.hospitalName }}"
+      placeholder="请输入用户名" border="{{ true }}" />
+    <van-field always-embed label="医生" value="{{ createXfQuery.hospitalName }}"
+      placeholder="请输入用户名" border="{{ true }}" />
+    <van-field always-embed label="产品" value="{{ createXfQuery.productName }}"
+      placeholder="请输入用户名" border="{{ true }}" />
+    <van-field always-embed label="病例潜力" value="{{ createXfQuery.potential }}"
+      placeholder="请输入用户名" border="{{ true }}" />
+    <van-field always-embed label="目前病例" value="{{ createXfQuery.nowCase }}"
+      placeholder="请输入用户名" border="{{ true }}" />
+    <van-field always-embed label="目标病例" value="{{ createXfQuery.goalCase }}"
+      placeholder="请输入用户名" border="{{ true }}" />
     <van-cell title="拜访目的" is-link border="{{ true }}" />
     <van-cell title="客户关系" is-link border="{{ true }}" />
-    <van-field label="产品观念" value="{{ value }}" placeholder="请输入用户名"
+    <van-field always-embed label="产品观念"
+      value="{{ createXfQuery.hospitalName }}" placeholder="请输入用户名"
       border="{{ true }}" />
-    <van-field label="拜访计划开始时间" value="{{ value }}" placeholder="请输入用户名"
+    <van-field always-embed label="拜访计划开始时间"
+      value="{{ createXfQuery.planStartTime }}" placeholder="请输入用户名"
       border="{{ true }}" />
   </view>
-  <view>协访计划</view>
-  <view>
-    <van-cell title="协访目的" is-link border="{{ true }}" />
+  <view class="px-8">协访计划</view>
+  <view class="px-4">
+    <van-cell title="协访目的" is-link border="{{ true }}" bind:click="setXfTarget" />
     <van-field label="协访计划开始时间" value="{{ value }}" placeholder="请输入用户名"
       border="{{ true }}" />
   </view>
+  <view class="grid grid-cols-2 gap-x-4 px-4 mt-8">
+    <van-button custom-class="w-full btn-cancel" bind:click="cancelXfPlan">取消
+    </van-button>
+    <van-button custom-class="w-full btn-confirm" bind:click="confrimXfPlan">确认
+    </van-button>
+  </view>
 </van-action-sheet>
+
+<!-- 协访目的checkbox组 -->
+<van-dialog use-slot title="协防目的" show="{{ xf_target_show }}" show-cancel-button
+  width="350" custom-style="height: 80%;" z-index="{{ 9999 }}">
+  <view class="w-full h-4-5 px-4 overflow-scroll xiefang-dialog">
+    <van-tabs>
+      <van-tab title="辅导">
+        <van-checkbox-group class="xiefang-checkbox" value="{{ cbx_fudao }}"
+          bind:change="onChange">
+          <van-checkbox name="1" shape="square" custom-class="mt-4">拜访背景分析
+          </van-checkbox>
+          <van-checkbox name="2" shape="square" custom-class="mt-4">拜访目的确认
+          </van-checkbox>
+          <van-checkbox name="3" shape="square" custom-class="mt-4">检查代表资料文献准备
+          </van-checkbox>
+          <van-checkbox name="4" shape="square" custom-class="mt-4">
+            对可能出现反对意见的解决方案</van-checkbox>
+          <van-checkbox name="5" shape="square" custom-class="mt-4">补充信息
+          </van-checkbox>
+          <van-checkbox name="6" shape="square" custom-class="mt-4">帮助解决异议
+          </van-checkbox>
+          <van-checkbox name="7" shape="square" custom-class="mt-4">帮助缔结
+          </van-checkbox>
+          <van-checkbox name="8" shape="square" custom-class="mt-4">以代表为主的拜访
+          </van-checkbox>
+          <van-checkbox name="9" shape="square" custom-class="mt-4">拜访结束前帮助解决信息
+          </van-checkbox>
+          <van-checkbox name="10" shape="square" custom-class="mt-4">访后总结
+          </van-checkbox>
+        </van-checkbox-group>
+      </van-tab>
+      <van-tab title="检查">
+        <van-checkbox-group class="xiefang-checkbox" value="{{ cbx_fudao }}"
+          bind:change="onChange">
+          <van-checkbox name="1" shape="square" custom-class="mt-4">基础信息是否准确
+          </van-checkbox>
+          <van-checkbox name="2" shape="square" custom-class="mt-4">会议执行情况
+          </van-checkbox>
+          <van-checkbox name="3" shape="square" custom-class="mt-4">
+            与该客户相关开发内容是否真实
+          </van-checkbox>
+        </van-checkbox-group>
+      </van-tab>
+      <van-tab title="解决问题">
+        <van-checkbox-group class="xiefang-checkbox" value="{{ cbx_fudao }}"
+          bind:change="onChange">
+          <van-checkbox name="1" shape="square" custom-class="mt-4">要求生意
+          </van-checkbox>
+          <van-checkbox name="2" shape="square" custom-class="mt-4">处理异议
+          </van-checkbox>
+          <van-checkbox name="3" shape="square" custom-class="mt-4">邀请参会者
+          </van-checkbox>
+          <van-checkbox name="4" shape="square" custom-class="mt-4">
+            协助开发</van-checkbox>
+          <van-checkbox name="5" shape="square" custom-class="mt-4">解决停控药
+          </van-checkbox>
+        </van-checkbox-group>
+      </van-tab>
+    </van-tabs>
+  </view>
+</van-dialog>

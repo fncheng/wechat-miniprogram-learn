@@ -41,7 +41,7 @@ page {
 }
 
 .meeting-modal {
-  height: 32rem;
+  height: 75%;
   padding-top: 1.2rem;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -58,12 +58,8 @@ page {
   color: rgb(48, 23, 23);
 }
 
-.metting-modal-sheet {}
-
-.meeting-modal-action {}
-
 .product-sense {
-  height: 36rem;
+  height: 90%;
   padding: 0.75rem 1.5rem;
 }
 
@@ -74,4 +70,20 @@ page {
 
 .button-action {
   width: 48%;
+}
+
+.pd_idea_btn {
+  height: 1.8rem !important;
+  border-radius: 1.5rem !important;
+}
+
+/* 会中执行清单 */
+.meeting-execute {
+  height: 75%;
+}
+
+/* rewrite */
+.cell-border-bottom::after {
+  left: 0;
+  right: 0;
 }

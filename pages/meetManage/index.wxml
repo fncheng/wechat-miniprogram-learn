@@ -1,7 +1,7 @@
-<van-tabs active="{{ active }}" bind:change="onChange">
-  <van-tab title="全部">全部</van-tab>
-  <van-tab title="未开始">未开始</van-tab>
-  <van-tab title="已反馈">已反馈</van-tab>
+<van-tabs active="{{ activeTab }}" bind:change="onChange">
+  <van-tab title="全部" name="1">全部</van-tab>
+  <van-tab title="未开始" name="2">未开始</van-tab>
+  <van-tab title="已反馈" name="3">已反馈</van-tab>
 </van-tabs>
 
 <view>
@@ -13,14 +13,19 @@
 </view>
 
 <view>
-  <view class="flex flex-col justify-around px-3 py-2 meeting-card">
+  <view wx:for="{{ meetingList }}" wx:if="{{ item.meetingStatus===activeTab }}"
+    wx:key="item" class="flex flex-col justify-around px-3 py-2 meeting-card">
     <view class="flex justify-between">
-      <view class="meeting-org">复旦大学附属华山医院</view>
-      <view class="meeting-status">已申请</view>
+      <view class="meeting-org">{{ item.hospitalName }}</view>
+      <view class="meeting-status">{{ meetingStatus[item.meetingStatus] }}
+      </view>
     </view>
     <view class="flex justify-between">
-      <view class="meeting-time">3月3日 心内科 张主任 科室会</view>
-      <view class="meeting-action">
+      <view class="meeting-time">
+        {{item.meetingPlanTime}} {{item.deptNames}}
+        {{item.customerName}} {{item.meetingTypeName}}
+      </view>
+      <view class="meeting-action" bindtap="onFeedback">
         执行反馈
       </view>
     </view>
@@ -39,8 +44,8 @@
   </view>
 </view>
 
-<!-- 会议反馈 -->
-<van-action-sheet show="{{ false }}">
+<!-- 会议执行反馈 -->
+<van-action-sheet show="{{ feedback_mdoal_show }}">
   <view class="meeting-modal flex flex-col">
     <view class="title flex justify-center items-center">
       会议执行反馈
@@ -48,8 +53,9 @@
     <view class="meeting-modal-title">3月3日十院心内科张主任科室会</view>
     <view class="metting-modal-sheet">
       <van-cell-group>
-        <van-field border="{{true}}" label="会议实际时间" value="{{ value }}"
-          placeholder="请输入用户名" border="{{ false }}" bind:change="onChange">
+        <van-field always-embed border="{{true}}" label="会议实际时间"
+          value="{{ value }}" placeholder="请输入用户名" border="{{ false }}"
+          bind:change="onChange">
           <view slot="input" class="flex-1">
             <view class="flex justify-start">
               <picker mode="date">
@@ -67,94 +73,223 @@
             </view>
           </view>
         </van-field>
-        <van-field label="实际劳务费用" value="{{ value }}" placeholder="请输入用户名"
-          border="{{ false }}" bind:change="onChange" />
-        <van-field label="实际餐费" type="digit" value="{{ value }}" placeholder="元"
-          placeholder-style="text-align: right" border="{{ false }}"
-          bind:change="onChange" />
-        <van-field label="会中执行清单" value="{{ value }}" placeholder="元"
+        <van-field always-embed label="实际劳务费用" value="{{ value }}"
+          placeholder="请输入用户名" border="{{ false }}" bind:change="onChange">
+          <view slot="right-icon">元</view>
+        </van-field>
+        <van-field always-embed label="实际餐费" type="digit" value="{{ value }}"
           placeholder-style="text-align: right" border="{{ false }}"
           bind:change="onChange">
-          <view slot="input" class="flex-1">
-            <picker mode="selector" range="{{ [1,2,3] }}">请选择</picker>
-          </view>
+          <view slot="right-icon">元</view>
         </van-field>
-        <van-field label="实际参会人员" value="{{ value }}" placeholder="请输入用户名"
-          border="{{ false }}" bind:change="onChange" />
+        <van-cell title="会中执行清单" border="{{ true }}" is-link
+          arrow-direction="down" bind:click="setMeetingInventory">
+        </van-cell>
+        <van-field always-embed label="实际参会人员" value="{{ value }}"
+          placeholder="请输入用户名" border="{{ true }}" bind:change="onChange" />
       </van-cell-group>
     </view>
-    <view class="flex justify-around">
-      <view>参会者</view>
-      <view>产品观念</view>
-      <view>跟进</view>
+    <view
+      class="flex justify-around items-center h-10 leading-10 cell-border-bottom">
+      <text>参会者</text>
+      <text>产品观念</text>
+      <text>跟进</text>
     </view>
     <view>
-      <view class="flex justify-around">
-        <view class="flex justify-center">医生1</view>
-        <view class="flex justify-center">
-          <van-button>产品观念</van-button>
+      <view class="flex justify-around h-10 cell-border-bottom">
+        <view class="flex justify-center items-center">医生1</view>
+        <view class="flex justify-center items-center">
+          <van-button custom-class="pd_idea_btn" type="primary"
+            bindtap="setPdIdea">产品观念
+          </van-button>
         </view>
-        <view class="flex justify-center">
-          <checkbox></checkbox>
+        <view class="flex justify-center items-center">
+          <van-checkbox value="{{ true }}" shape="square"></van-checkbox>
+        </view>
+      </view>
+      <view class="flex justify-around h-10 cell-border-bottom">
+        <view class="flex justify-center items-center">医生1</view>
+        <view class="flex justify-center items-center">
+          <van-button custom-class="pd_idea_btn" type="primary">产品观念
+          </van-button>
+        </view>
+        <view class="flex justify-center items-center">
+          <van-checkbox value="{{ true }}" shape="square"></van-checkbox>
         </view>
       </view>
     </view>
-    <view class="meeting-modal-action flex justify-between">
-      <view class="button-action">
-        <button>取消</button>
-      </view>
-      <view class="button-action">
-        <button>确认</button>
-      </view>
+    <view class="grid grid-cols-2 gap-x-4 px-4 mt-16">
+      <van-button custom-class="w-full btn-cancel"
+        bindtap="cancelMeetingFeedback">取消</van-button>
+      <van-button custom-class="w-full btn-confirm"
+        bindtap="confrimMeetingFeedback">确认</van-button>
     </view>
   </view>
 </van-action-sheet>
 
 <!-- 会议执行清单 -->
-<van-action-sheet show="{{ false }}" description="会议执行清单">
-  <!-- 此处遍历 -->
-  <view class="flex flex-col">
-    <view class="flex">
-      <view>
-        <van-radio></van-radio>
-      </view>
-      <view>会议当日提醒讲者会议时间</view>
+<van-action-sheet show="{{ meeting_execute_show }}" description="会中执行清单">
+  <view class="meeting-execute px-4">
+    <van-checkbox-group value="{{ cbx_meetingExecute }}"
+      bind:change="checkMeetingInventory">
+      <van-checkbox wx:for="{{ meetingExecuteList }}" name="{{ item.id }}"
+        shape="square" custom-class="mt-4">
+        {{ item.value }}
+      </van-checkbox>
+      <van-checkbox name="会议当日提醒讲者会议时间" shape="square" custom-class="mt-4">
+        会议当日提醒讲者会议时间
+      </van-checkbox>
+      <van-checkbox name="2" shape="square" custom-class="mt-4">
+        提前到场调试投影仪、电脑等会议设备
+      </van-checkbox>
+      <van-checkbox name="3" shape="square" custom-class="mt-4">
+        提醒各计划邀请的客户准时参会
+      </van-checkbox>
+      <van-checkbox name="4" shape="square" custom-class="mt-4">
+        讲者到场签署劳务协议
+      </van-checkbox>
+      <van-checkbox name="5" shape="square" custom-class="mt-4">
+        准备聚餐
+      </van-checkbox>
+      <van-checkbox name="6" shape="square" custom-class="mt-4">
+        记录会议过程中各客户异议并积极解答
+      </van-checkbox>
+      <van-checkbox name="7" shape="square" custom-class="mt-4">拍照
+      </van-checkbox>
+      <van-checkbox name="8" shape="square" custom-class="mt-4">签到表
+      </van-checkbox>
+    </van-checkbox-group>
+    <view class="grid grid-cols-2 gap-x-4 px-4 mt-16">
+      <van-button custom-class="w-full btn-cancel"
+        bind:click="cancelMeetingInventory">取消</van-button>
+      <van-button custom-class="w-full btn-confirm"
+        bind:click="confrimMeetingInventory">确认</van-button>
     </view>
-    <view><button>完成</button></view>
   </view>
 </van-action-sheet>
 
 <!-- 产品观念 -->
-<van-action-sheet show="{{ false }}">
+<van-action-sheet show="{{ pd_idea_show }}">
   <view class="product-sense">
-    <view class="flex justify-around">
+    <view class="flex justify-around pb-4 cell-border-bottom">
       <view class="flex-1">产品观念</view>
       <view class="w-28 flex justify-around">
         <text>同意</text>
         <text>反对</text>
       </view>
     </view>
-    <view class="flex product-sense-item">
-      <view class="flex-1">HCY危害</view>
-      <view>
-        <!-- <van-radio-group value="{{ radio }}" class="flex justify-around"
-          custom-class="flex justify-around">
-          <van-radio name="1">单选框 1</van-radio>
-          <van-radio name="2">单选框 2</van-radio>
-        </van-radio-group> -->
-        <radio-group class="w-28 flex justify-around">
-          <radio value="1"></radio>
-          <radio value="0"></radio>
-        </radio-group>
-      </view>
+    <view class="flex py-2 cell-border-bottom">
+      <text class="flex-1">HCY危害</text>
+      <van-radio-group class="w-24 flex justify-center items-center"
+        direction="horizontal">
+        <van-radio value="1" shape="square"></van-radio>
+        <van-radio value="0" shape="square"></van-radio>
+      </van-radio-group>
     </view>
-    <view class="meeting-modal-action flex justify-between">
-      <view class="button-action">
-        <button>取消</button>
-      </view>
-      <view class="button-action">
-        <button>确认</button>
-      </view>
+    <view class="flex py-2 cell-border-bottom">
+      <text class="flex-1">H型高血压是中风的重要危险因素</text>
+      <van-radio-group class="w-24 flex justify-center items-center"
+        direction="horizontal">
+        <van-radio value="1" shape="square"></van-radio>
+        <van-radio value="0" shape="square"></van-radio>
+      </van-radio-group>
+    </view>
+    <view class="flex py-2 cell-border-bottom">
+      <text class="flex-1">H型高血压是是中风的第一危险因素</text>
+      <van-radio-group class="w-24 flex justify-center items-center"
+        direction="horizontal">
+        <van-radio value="1" shape="square"></van-radio>
+        <van-radio value="0" shape="square"></van-radio>
+      </van-radio-group>
+    </view>
+    <view class="flex py-2 cell-border-bottom">
+      <text class="flex-1">HCY≥6.3开始干预</text>
+      <van-radio-group class="w-24 flex justify-center items-center"
+        direction="horizontal">
+        <van-radio value="1" shape="square"></van-radio>
+        <van-radio value="0" shape="square"></van-radio>
+      </van-radio-group>
+    </view>
+    <view class="flex py-2 cell-border-bottom">
+      <text class="flex-1">依叶是H型高血压规范治疗方案 基础用药</text>
+      <van-radio-group class="w-24 flex justify-center items-center"
+        direction="horizontal">
+        <van-radio value="1" shape="square"></van-radio>
+        <van-radio value="0" shape="square"></van-radio>
+      </van-radio-group>
+    </view>
+    <view class="flex py-2 cell-border-bottom">
+      <text class="flex-1">依叶比单方联用患者依从性更好</text>
+      <van-radio-group class="w-24 flex justify-center items-center"
+        direction="horizontal">
+        <van-radio value="1" shape="square"></van-radio>
+        <van-radio value="0" shape="square"></van-radio>
+      </van-radio-group>
+    </view>
+    <view class="flex py-2 cell-border-bottom">
+      <text class="flex-1">依叶与CCB联用可减少咳嗽及 水肿发生率</text>
+      <van-radio-group class="w-24 flex justify-center items-center"
+        direction="horizontal">
+        <van-radio value="1" shape="square"></van-radio>
+        <van-radio value="0" shape="square"></van-radio>
+      </van-radio-group>
+    </view>
+    <view class="flex py-2 cell-border-bottom">
+      <text class="flex-1">医保需检测不影响产品使用</text>
+      <van-radio-group class="w-24 flex justify-center items-center"
+        direction="horizontal">
+        <van-radio value="1" shape="square"></van-radio>
+        <van-radio value="0" shape="square"></van-radio>
+      </van-radio-group>
+    </view>
+    <view class="flex py-2 cell-border-bottom">
+      <text class="flex-1">依叶平稳降压可降低终点 事件发生率</text>
+      <van-radio-group class="w-24 flex justify-center items-center"
+        direction="horizontal">
+        <van-radio value="1" shape="square"></van-radio>
+        <van-radio value="0" shape="square"></van-radio>
+      </van-radio-group>
+    </view>
+    <view class="flex py-2 cell-border-bottom">
+      <text class="flex-1">带量采购未完成不影响使用</text>
+      <van-radio-group class="w-24 flex justify-center items-center"
+        direction="horizontal">
+        <van-radio value="1" shape="square"></van-radio>
+        <van-radio value="0" shape="square"></van-radio>
+      </van-radio-group>
+    </view>
+    <view class="flex py-2 cell-border-bottom">
+      <text class="flex-1">单日治疗费用合理</text>
+      <van-radio-group class="w-24 flex justify-center items-center"
+        direction="horizontal">
+        <van-radio value="1" shape="square"></van-radio>
+        <van-radio value="0" shape="square"></van-radio>
+      </van-radio-group>
+    </view>
+    <view class="flex py-2 cell-border-bottom">
+      <text class="flex-1">依叶在降压达标基础上额外降低CKD 患者慢性肾病进展56%、eGFR 下降速度风险44%</text>
+      <van-radio-group class="w-24 flex justify-center items-center"
+        direction="horizontal">
+        <van-radio value="1" shape="square"></van-radio>
+        <van-radio value="0" shape="square"></van-radio>
+      </van-radio-group>
+    </view>
+    <view class="flex py-2 cell-border-bottom">
+      <text class="flex-1">依叶较单纯降压药对于肾功能 更具保护作用，额外降低肾脏病变 发展风险21%</text>
+      <van-radio-group class="w-24 flex justify-center items-center"
+        direction="horizontal">
+        <van-radio value="1" shape="square"></van-radio>
+        <van-radio value="0" shape="square"></van-radio>
+      </van-radio-group>
+    </view>
+
+    <view class="grid grid-cols-2 gap-x-4 px-4 mt-8">
+      <van-button custom-class="w-full btn-cancel" bindtap="cancelPdIdea">
+        取消
+      </van-button>
+      <van-button custom-class="w-full btn-confirm" bindtap="confrimPdIdea">
+        确认
+      </van-button>
     </view>
   </view>
 </van-action-sheet>

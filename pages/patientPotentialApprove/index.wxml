@@ -1,0 +1,41 @@
+<!--pages/patientPotentialApprove/index.wxml-->
+<van-tabs active="{{ active }}" bind:change="onChange">
+  <van-tab title="全部">全部</van-tab>
+  <van-tab title="未开始">未开始</van-tab>
+  <van-tab title="已反馈">已反馈</van-tab>
+</van-tabs>
+
+<view>
+  <van-search class="w-full" use-left-icon-slot="{{ true }}"
+    use-right-icon-slot="{{true}}" value="{{ value }}"
+    placeholder="搜索（医生、医院、产品）">
+    <van-icon slot="right-icon" name="search" />
+  </van-search>
+</view>
+
+<view>
+  <view class="flex flex-col justify-around px-3 py-2 meeting-card">
+    <view class="flex justify-between">
+      <view class="meeting-org">复旦大学附属华山医院</view>
+      <view class="meeting-status">已提交</view>
+    </view>
+    <view class="flex justify-between">
+      <view class="meeting-time">3月3日 心内科 张主任 科室会</view>
+      <view class="meeting-action">
+        执行反馈
+      </view>
+    </view>
+  </view>
+  <view class="flex flex-col justify-around px-3 py-2 meeting-card">
+    <view class="flex justify-between">
+      <view class="meeting-org">复旦大学附属华山医院(依叶)</view>
+      <view class="meeting-status">已审核</view>
+    </view>
+    <view class="flex justify-between">
+      <view class="meeting-time">3月3日 心内科 张主任 科室会</view>
+      <view class="meeting-action">
+        审批
+      </view>
+    </view>
+  </view>
+</view>

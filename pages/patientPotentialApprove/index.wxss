@@ -1,0 +1,41 @@
+page {
+  background-color: #F7FCFF;
+}
+
+.van-search {
+  padding-left: 10rpx !important;
+  padding-right: 10rpx !important;
+}
+
+.meeting-card {
+  height: 5rem;
+  margin-top: 0.5rem;
+  background-color: #fff;
+}
+
+.meeting-org {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.meeting-status {
+  font-size: 0.88rem;
+}
+
+.meeting-time {
+  font-size: 0.88rem;
+  color: #333333;
+  font-weight: 300;
+}
+
+.meeting-action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4.25rem;
+  height: 1.56rem;
+  font-size: 0.88rem;
+  color: #fff;
+  background-color: rgba(98, 120, 254, 0.75);
+  border-radius: 0.81rem;
+}

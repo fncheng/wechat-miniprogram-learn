@@ -10,6 +10,7 @@ page {
   width: 23.44rem;
   height: 3.75rem;
   background-color: #fff;
+  color: #6278FE;
 }
 
 van-cell {
@@ -17,6 +18,19 @@ van-cell {
 }
 
 .add-patient-modal {
-  height: 32rem;
+  height: 80%;
   /* padding: 1.25rem 1rem; */
+}
+
+.text-gray {
+  color: #333333 !important;
+}
+
+/* reset van-cell style */
+.van-cell__title {
+  padding-left: 1rem;
+}
+
+.van-cell__value {
+  text-align: left !important;
 }

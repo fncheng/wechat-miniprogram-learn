@@ -3,22 +3,30 @@
 
 <view>
   <van-cell-group>
-    <van-field custom-style="margin-top: 0.5rem" label="医院" value="{{ value }}"
-      placeholder="请输入用户名" border="{{ true }}" />
+    <van-field custom-style="margin-top: 0.5rem" label="医院"
+      value="{{ patientPotQuery.hospitalName }}" placeholder="请输入用户名"
+      border="{{ true }}" />
     <van-field custom-style="margin-top: 0.5rem" label="科室或处室"
-      value="{{ value }}" placeholder="请输入用户名" border="{{ true }}" />
+      value="{{ patientPotQuery.deptName }}" placeholder="请输入用户名"
+      border="{{ true }}" />
     <van-field custom-style="margin-top: 0.5rem" label="客户姓名*"
-      value="{{ value }}" placeholder="请输入用户名" border="{{ true }}" />
-    <van-field custom-style="margin-top: 0.5rem" label="性别*" value="{{ value }}"
-      placeholder="请输入用户名" border="{{ true }}" />
-    <van-field custom-style="margin-top: 0.5rem" label="产品*" value="{{ value }}"
-      placeholder="请输入用户名" border="{{ true }}" />
-    <van-field custom-style="margin-top: 0.5rem" label="职称*" value="{{ value }}"
-      placeholder="请输入用户名" border="{{ true }}" />
+      value="{{ patientPotQuery.customerName }}" placeholder="请输入用户名"
+      border="{{ true }}" />
+    <van-cell custom-style="margin-top: 0.5rem" title="性别*" placeholder="请输入用户名"
+      value-class="text-left"
+      value="{{ patientPotQuery.sex === 1 ? '男' : '女' }}" border="{{ true }}"
+      is-link arrow-direction="down" bind:click="changeSex">
+    </van-cell>
+    <van-cell custom-style="margin-top: 0.5rem" title="产品*" border="{{ true }}"
+      is-link arrow-direction="down" bind:click="changeSex" />
+    <van-cell custom-style="margin-top: 0.5rem" title="职称*" value="请选择职称"
+      value-class="text-left" border="{{ true }}" is-link arrow-direction="down"
+      bind:click="changeSex" />
     <van-field custom-style="margin-top: 0.5rem" label="联系方式"
-      value="{{ value }}" placeholder="请输入用户名" border="{{ true }}" />
-    <van-field custom-style="margin-top: 0.5rem" label="行政职务*"
-      value="{{ value }}" placeholder="请输入用户名" border="{{ true }}" />
+      value="{{ patientPotQuery.hospitalName }}" placeholder="请输入联系方式"
+      border="{{ true }}" />
+    <van-cell custom-style="margin-top: 0.5rem" title="行政职务" border="{{ true }}"
+      is-link arrow-direction="down" bind:click="changeSex" />
   </van-cell-group>
   <view class="flex">
     <van-checkbox value="{{true}}"></van-checkbox>
@@ -26,62 +34,106 @@
   </view>
   <view></view>
   <view>
-    <button>新客户潜力信息维护</button>
+    <van-button type="info" bind:click="addPatientPot">新客户潜力信息维护</van-button>
   </view>
-  <view>
-    <button type="submit">提交</button>
+  <view class="submit px-4">
+    <van-button type="primary" bind:click="submitPatientPot">提交</van-button>
   </view>
 </view>
 
+<van-action-sheet show="{{ sex_picker_show }}" actions="{{ sex_options }}"
+  bind:select="onSexSelect">
+  <!-- <van-picker columns="{{ ['男','女'] }}"></van-picker> -->
+</van-action-sheet>
+
+
 <!-- 新客户潜力信息 -->
-<van-action-sheet show="{{ true }}" description="新客户潜力信息">
-  <view class="add-patient-modal flex flex-col">
+<van-action-sheet show="{{ patientPot_sheet_show }}" description="新客户潜力信息">
+  <view class="add-patient-modal flex flex-col px-4">
     <view>
-      <view>
-        <van-field label="潜力信息" value="{{ value }}" placeholder="请输入用户名"
-          border="{{ true }}">
-          <view slot="input">
-            <text>{{ currentDate }}</text>
-            <van-icon name="calendar-o" />
-          </view>
-        </van-field>
-        <van-field label="门诊天数" value="{{ value }}" placeholder="请输入用户名"
-          border="{{ true }}" />
-        <van-field label="日门诊量" value="{{ value }}" placeholder="请输入用户名"
-          border="{{ true }}" />
-        <van-field label="高血压患者比例" value="{{ value }}" placeholder="请输入用户名"
-          border="{{ true }}" />
-        <van-field label="复诊周期" value="{{ value }}" placeholder="请输入用户名"
-          border="{{ true }}" />
-        <van-field label="床位数" value="{{ value }}" placeholder="请输入用户名"
-          border="{{ true }}" />
-        <van-field label="月度床位周转次数" value="{{ value }}" placeholder="请输入用户名"
-          border="{{ true }}" />
-        <van-field label="高血压患者比例" value="{{ value }}" placeholder="请输入用户名"
-          border="{{ true }}" />
-        <van-field label="随访周期" value="{{ value }}" placeholder="请输入用户名"
-          border="{{ true }}" />
-        <van-field label="病例管理潜力" value="{{ value }}" placeholder="请输入用户名"
-          border="{{ true }}" />
+      <view
+        class="font-medium h-10 leading-10 text-gray px-4 cell-border-bottom">
+        潜力信息
+      </view>
+      <van-field label-class="font-medium text-gray" label="月份"
+        value="{{ value }}" border="{{ true }}">
+        <view slot="input">
+          <text>{{ currentDate }}</text>
+          <van-icon name="calendar-o" />
+        </view>
+      </van-field>
+      <van-field label="门诊天数" value="{{ patientPotInfo.outpatientNum }}"
+        placeholder="请输入用户名" border="{{ true }}">
+        <view slot="right-icon">天</view>
+      </van-field>
+      <van-field label="日门诊量" value="{{ patientPotInfo.dayOutpatientNum }}"
+        placeholder="请输入用户名" border="{{ true }}">
+        <view slot="right-icon">例</view>
+      </van-field>
+      <van-field label="门诊高血压患者比例" value="{{ patientPotInfo.outpatientEhRate }}"
+        placeholder="请输入用户名" border="{{ true }}">
+        <view slot="right-icon">%</view>
+      </van-field>
+      <van-field label="复诊周期" value="{{ patientPotInfo.againPeriod }}"
+        placeholder="请输入用户名" border="{{ true }}">
+        <view slot="right-icon">周</view>
+      </van-field>
+      <van-field label="床位数" value="{{ patientPotInfo.bedNum }}"
+        placeholder="请输入用户名" border="{{ true }}">
+        <view slot="right-icon">张</view>
+      </van-field>
+      <van-field label="月度床位周转次数" value="{{ patientPotInfo.monthBedNum }}"
+        placeholder="请输入用户名" border="{{ true }}">
+        <view slot="right-icon">次</view>
+      </van-field>
+      <van-field label="高血压患者比例" value="{{ patientPotInfo.inpatientEhRate }}"
+        placeholder="请输入用户名" border="{{ true }}">
+        <view slot="right-icon">%</view>
+      </van-field>
+      <van-field label="随访周期" value="{{ patientPotInfo.followPeriodNum }}"
+        placeholder="请输入用户名" border="{{ true }}">
+        <view slot="right-icon">周</view>
+      </van-field>
+      <van-field label="病例管理潜力" value="{{ patientPotInfo.potentialValue }}"
+        placeholder="请输入用户名" border="{{ true }}">
+        <view slot="right-icon">天</view>
+      </van-field>
+    </view>
+    <view class="relative">
+      <view
+        class="font-medium h-10 leading-10 text-gray px-4 cell-border-bottom">
+        竞品信息
+      </view>
+      <view class="flex justify-end items-center h-10 cell-border-bottom">
+        <text class="flex-1 text-center">竞品</text>
+        <text class="w-24 text-center">价格</text>
+      </view>
+      <view class="flex items-center h-10 cell-border-bottom">
+        <text class="w-16 text-center">1</text>
+        <view class="flex-1">{{ patientPotInfo.competitionOne }}</view>
+        <view class="w-24 text-center">{{ patientPotInfo.priceOne }}</view>
+      </view>
+      <view class="flex items-center h-10 cell-border-bottom">
+        <text class="w-16 text-center">2</text>
+        <view class="flex-1">{{ patientPotInfo.competitionTwo }}</view>
+        <view class="w-24 text-center">{{ patientPotInfo.priceTwo }}</view>
+      </view>
+      <view class="flex items-center h-10 cell-border-bottom">
+        <text class="w-16 text-center">3</text>
+        <view class="flex-1">{{ patientPotInfo.competitionThree}}</view>
+        <view class="w-24 text-center">{{ patientPotInfo.priceThree }}</view>
       </view>
     </view>
-    <view>
-      <view>竞品信息</view>
-      <view class="flex justify-around">
-        <text>竞品</text>
-        <text>价格</text>
-      </view>
-      <view class="flex justify-around">
-        <text>1</text>
-        <view>替米沙坦氢氯噻嗪片</view>
-        <view>30</view>
-      </view>
+    <!-- 提交按钮 -->
+    <view class="grid grid-cols-2 gap-x-4 px-4 mt-16">
+      <van-button custom-class="w-full btn-cancel"
+        bind:click="addPatientPot_cancel">
+        取消
+      </van-button>
+      <van-button custom-class="w-full btn-confirm"
+        bind:click="addPatientPot_confirm">
+        确认
+      </van-button>
     </view>
-    <!-- <view> -->
-    <view class="grid grid-cols-2 gap-x-4 px-4">
-      <van-button custom-class="w-full btn-cancel">取消</van-button>
-      <van-button custom-class="w-full btn-confirm">确认</van-button>
-    </view>
-    <!-- </view> -->
   </view>
 </van-action-sheet>

@@ -14,7 +14,7 @@ const BASE_URL = config.BASE_URL
 try {
   wx.setStorageSync(
     'token',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzODYiLCJ1c2VyTmFtZSI6IuiRo-aIkCIsImV4cCI6MTY0ODI4Njk1OSwibmJmIjoxNjQ3ODU0OTU5LCJqdGkiOiJhZDM3NWE3N2MyZThlOTg4ZDY3MjI1NDRlY2Q1NWIzNSJ9.Xt99gItkYfEF7guwnikRijt72KJ5ALssNjdxFfD-fbA'
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzODYiLCJ1c2VyTmFtZSI6IuiRo-aIkCIsImV4cCI6MTY0ODYwMzQ0NSwibmJmIjoxNjQ4MTcxNDQ1LCJqdGkiOiIxY2NjZjkzM2Q0OGNjYzQ2ZDJlNWI4NjQwYWM4MjRkOCJ9.6-O365lXg5SYgO7rJcqL-U-2ZzQbP-jKxWKrUXliSqw'
   )
   wx.setStorageSync('traceId', '876fb85b3d75-468c-8ac2-7c860a5ee764')
 } catch (err) {

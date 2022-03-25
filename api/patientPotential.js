@@ -14,10 +14,23 @@ export function addCustomerInfo(data) {
 /**
  * @description: 新增潜力信息
  */
- export function addPotentialInfo(data) {
+export function addPotentialInfo(data) {
   return $http({
     url: '/potential/addPotentialInfo',
     method: 'POST',
     data,
   })
 }
+
+/**
+ * @description: 竞品信息列表
+ */
+export function getCompeList(data) {
+  return $http({
+    url: '/potential/queryCompeteDrugList',
+    method: 'POST',
+    data,
+  })
+}
+
+

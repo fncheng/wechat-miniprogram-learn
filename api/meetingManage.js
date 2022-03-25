@@ -1,7 +1,7 @@
 import $http from './index'
 
 /**
- * @description: 会议列表-APP
+ * @description: 获取会议列表
  */
 export function getMeetingList(data) {
   return $http({
@@ -12,11 +12,22 @@ export function getMeetingList(data) {
 }
 
 /**
- * @description: 会议列表-APP
+ * @description: 根据会议id获取计划参会者下拉列表
  */
- export function getVisitList(data) {
+export function getVisitList(data) {
   return $http({
-    url: '/visit/visitList',
+    url: '/meeting/queryJoinMeetingPeopleList',
+    method: 'POST',
+    data,
+  })
+}
+
+/**
+ * @description: 提交会议反馈
+ */
+export function setMeetingFeedback(data) {
+  return $http({
+    url: '/meeting/appMeetingFeedback',
     method: 'POST',
     data,
   })

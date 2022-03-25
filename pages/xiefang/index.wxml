@@ -92,18 +92,18 @@
 <van-action-sheet show="{{ create_xf_show }}" description="创建协访计划">
   <view class="px-8">拜访计划详情</view>
   <view class="px-4">
-    <van-cell always-embed label="医院" value="{{ createXfQuery.hospitalName }}"
-      placeholder="请输入用户名" border="{{ true }}" />
-    <van-field always-embed label="医生" value="{{ createXfQuery.hospitalName }}"
-      placeholder="请输入用户名" border="{{ true }}" />
-    <van-field always-embed label="产品" value="{{ createXfQuery.productName }}"
-      placeholder="请输入用户名" border="{{ true }}" />
-    <van-field always-embed label="病例潜力" value="{{ createXfQuery.potential }}"
-      placeholder="请输入用户名" border="{{ true }}" />
-    <van-field always-embed label="目前病例" value="{{ createXfQuery.nowCase }}"
-      placeholder="请输入用户名" border="{{ true }}" />
-    <van-field always-embed label="目标病例" value="{{ createXfQuery.goalCase }}"
-      placeholder="请输入用户名" border="{{ true }}" />
+    <van-cell title="医院" value="{{ bfPlanInfo.hospitalName }}"
+      border="{{ true }}" />
+    <van-cell title="医生" value="{{ bfPlanInfo.hospitalName }}"
+      border="{{ true }}" />
+    <van-cell title="产品" value="{{ bfPlanInfo.productName }}"
+      border="{{ true }}" />
+    <van-cell title="病例潜力" value="{{ bfPlanInfo.potential }}"
+      border="{{ true }}" />
+    <van-cell title="目前病例" value="{{ bfPlanInfo.nowCase }}"
+      border="{{ true }}" />
+    <van-cell title="目标病例" value="{{ bfPlanInfo.goalCase }}"
+      border="{{ true }}" />
     <van-cell title="拜访目的" is-link border="{{ true }}" />
     <van-cell title="客户关系" is-link border="{{ true }}" />
     <van-field always-embed label="产品观念"
@@ -163,3 +163,95 @@
     </van-tabs>
   </view>
 </van-dialog>
+
+<van-action-sheet show="{{ false }}" description="拜访及态度">
+  <view class="bf-title">3月3日十院心内科依叶开户</view>
+  <view class="grid grid-cols-2 gap-x-2 text-grey-300">
+    <van-cell title="科室主任">
+      <view>
+        <picker mode="selector">
+          科室主任
+          <van-icon name="arrow-down"></van-icon>
+        </picker>
+      </view>
+    </van-cell>
+    <van-cell title="态度">
+      <view class="btn-disabled">
+        <picker mode="selector">
+          态度
+          <van-icon name="arrow-down"></van-icon>
+        </picker>
+      </view>
+    </van-cell>
+    <van-cell title="药剂科主任">
+      <view>
+        <picker mode="selector">
+          科室主任
+          <van-icon name="arrow-down"></van-icon>
+        </picker>
+      </view>
+    </van-cell>
+    <van-cell title="态度">
+      <view class="btn-disabled">
+        <picker mode="selector">
+          态度
+          <van-icon name="arrow-down"></van-icon>
+        </picker>
+      </view>
+    </van-cell>
+    <van-cell title="医务处长">
+      <view>
+        <picker mode="selector">
+          科室主任
+          <van-icon name="arrow-down"></van-icon>
+        </picker>
+      </view>
+    </van-cell>
+    <van-cell title="态度">
+      <view class="btn-disabled">
+        <picker mode="selector">
+          态度
+          <van-icon name="arrow-down"></van-icon>
+        </picker>
+      </view>
+    </van-cell>
+    <van-cell title="业务院长">
+      <view>
+        <picker mode="selector">
+          科室主任
+          <van-icon name="arrow-down"></van-icon>
+        </picker>
+      </view>
+    </van-cell>
+    <van-cell title="态度">
+      <view class="btn-disabled">
+        <picker mode="selector">
+          态度
+          <van-icon name="arrow-down"></van-icon>
+        </picker>
+      </view>
+    </van-cell>
+    <van-cell title="院长">
+      <view>
+        <picker mode="selector">
+          科室主任
+          <van-icon name="arrow-down"></van-icon>
+        </picker>
+      </view>
+    </van-cell>
+    <van-cell title="态度">
+      <view class="btn-disabled">
+        <picker mode="selector" disabled>
+          态度
+          <van-icon name="arrow-down"></van-icon>
+        </picker>
+      </view>
+    </van-cell>
+  </view>
+  <view class="grid grid-cols-2 gap-x-4 px-4 mt-8">
+    <van-button custom-class="w-full btn-cancel" bind:click="cancelXfPlan">取消
+    </van-button>
+    <van-button custom-class="w-full btn-confirm" bind:click="confrimXfPlan">确认
+    </van-button>
+  </view>
+</van-action-sheet>

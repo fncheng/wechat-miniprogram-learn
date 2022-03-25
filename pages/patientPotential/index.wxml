@@ -10,7 +10,7 @@
     <van-cell custom-style="margin-top: 0.5rem" title="科室或处室"
       border="{{ true }}" is-link arrow-direction="down">
       <view>
-        <picker mode="selector" model:value="{{ deptName }}"
+        <picker mode="selector" model:value="{{ deptId }}"
           bindchange="onChangeDept" range="{{ deptNames }}" class="text-right">
           {{ deptName }}
         </picker>
@@ -26,7 +26,7 @@
     <van-cell custom-style="margin-top: 0.5rem" title="产品*" border="{{ true }}"
       is-link arrow-direction="down">
       <view>
-        <picker mode="selector" model:value="{{ product }}"
+        <picker mode="selector" model:value="{{ productId }}"
           bindchange="onChangeProduct" range="{{ products }}"
           class="text-right">
           {{ product }}
@@ -37,7 +37,7 @@
       value-class="text-left" border="{{ true }}" is-link
       arrow-direction="down">
       <view>
-        <picker mode="selector" model:value="{{ jobTitle }}"
+        <picker mode="selector" model:value="{{ jobTitleId }}"
           bindchange="onChangeJobTitle" range="{{ jobTitles }}"
           class="text-right">
           {{ jobTitle }}
@@ -50,7 +50,7 @@
     <van-cell custom-style="margin-top: 0.5rem" title="行政职务" border="{{ true }}"
       is-link arrow-direction="down">
       <view>
-        <picker mode="selector" model:value="{{ admPosition }}"
+        <picker mode="selector" model:value="{{ admPositionId }}"
           bindchange="onChangeAdmPos" range="{{ admPositions }}"
           class="text-right">
           {{ admPosition }}

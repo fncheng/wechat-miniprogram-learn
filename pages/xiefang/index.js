@@ -15,7 +15,14 @@ Page({
     myPlanList: [], // 协访计划列表
     subPlanList: [], // 下属的拜访计划
     /** 拜访计划详情 */
-    bfPlanInfo: {},
+    bfPlanInfo: {
+      hospitalName: '上海市第六人民医院',
+      productName: '一叶',
+      potential: 960,
+      nowCase: 5,
+      goalCase: 30,
+      planStartTime: '2022-02-22 11:00:00',
+    },
     createXfQuery: {
       hospitalName: '', // 医院名称
       productName: '', // 产品名称

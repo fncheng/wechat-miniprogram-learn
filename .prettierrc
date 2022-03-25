@@ -1,0 +1,56 @@
+{
+  "printWidth": 80,
+  "semi": false,
+  "overrides": [
+    {
+      "files": "*.test.js",
+      "options": {
+        "semi": true
+      }
+    },
+    {
+      "files": "*.wxml",
+      "options": {
+        "tabWidth": 2,
+        "parser": "html"
+      }
+    },
+    {
+      "files": [
+        "*.css"
+      ],
+      "options": {
+        "tabWidth": 2
+      }
+    },
+    {
+      "files": [
+        "*.less"
+      ],
+      "options": {
+        "tabWidth": 2
+      }
+    },
+    {
+      "files": [
+        "*.js",
+        "*.ts"
+      ],
+      "options": {
+        "arrowParens": "always",
+        "singleQuote": true,
+        "tabWidth": 2,
+        "trailingComma": "es5"
+      }
+    },
+    {
+      "files": [
+        "*.json"
+      ],
+      "options": {
+        "semi": true,
+        "tabWidth": 2
+      }
+    }
+  ]
+}

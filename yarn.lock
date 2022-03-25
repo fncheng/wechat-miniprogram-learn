@@ -4,40 +4,50 @@
 
 "@types/wechat-miniprogram@^3.4.0":
   version "3.4.0"
-  resolved "https://registry.npmmirror.com/@types/wechat-miniprogram/download/@types/wechat-miniprogram-3.4.0.tgz#d743d5b3c17bd531c2c178ea1fe9d92a0b23bcd0"
-  integrity sha1-10PVs8F71THCwXjqH+nZKgsjvNA=
+  resolved "https://registry.npmmirror.com/@types/wechat-miniprogram/-/wechat-miniprogram-3.4.0.tgz#d743d5b3c17bd531c2c178ea1fe9d92a0b23bcd0"
+  integrity sha512-7d7KDwoV42/ANx/0C8C4ctBv1q9XnXYD4Fz0C+3ii0Tm+HRIwwDcinv8S88Ut/Y80czlI0shGpTgLFe0GbrXWQ==
 
-"@vant/weapp@^1.7.2":
+"@vant/weapp@^1.10.2":
   version "1.10.2"
-  resolved "https://registry.npmmirror.com/@vant/weapp/download/@vant/weapp-1.10.2.tgz#013fbf2fdc6d59d9e92bb82a0f772f032fb52945"
+  resolved "https://registry.npmmirror.com/@vant/weapp/-/weapp-1.10.2.tgz#013fbf2fdc6d59d9e92bb82a0f772f032fb52945"
   integrity sha512-caqA0xQxM4lMRncFsRPPVMDdEzUBCJ4xdFXuKReXpEU3qwnVIP/WIjVDIi7mWyS7xqz8C9WfSW5JL4PrlSq31w==
+
+dayjs@^1.10.8:
+  version "1.10.8"
+  resolved "https://registry.npmmirror.com/dayjs/-/dayjs-1.10.8.tgz#267df4bc6276fcb33c04a6735287e3f429abec41"
+  integrity sha512-wbNwDfBHHur9UOzNUjeKUOJ0fCb0a52Wx0xInmQ7Y8FstyajiV1NmK1e00cxsr9YrE9r7yAChE0VvpuY5Rnlow==
 
 fast-deep-equal@^2.0.1:
   version "2.0.1"
-  resolved "https://registry.npmmirror.com/fast-deep-equal/download/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
-  integrity sha1-ewUhjd+WZ79/Nwv3/bLLFf3Qqkk=
+  resolved "https://registry.npmmirror.com/fast-deep-equal/-/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
+  integrity sha512-bCK/2Z4zLidyB4ReuIsvALH6w31YfAQDmXMqMx6FyfHqvBxtjC0eRumeSu4Bs3XtXwpyIywtSTrVT99BxY1f9w==
 
-miniprogram-computed@^4.2.1:
-  version "4.3.4"
-  resolved "https://registry.npmmirror.com/miniprogram-computed/download/miniprogram-computed-4.3.4.tgz#7382ac5bd578348d4ce0382fe754b54d22228e88"
-  integrity sha512-9Lr4EHB7Jwz3vpTsn0YqVeCyX1vJsdRIbbIfMt7hx54WKOvHYjlwR8Uuw4Hx21BOek8oqwd6+E7bRN3a7FFP1A==
+miniprogram-computed@^4.3.6:
+  version "4.3.6"
+  resolved "https://registry.npmmirror.com/miniprogram-computed/-/miniprogram-computed-4.3.6.tgz#0996b89ba1d12a002aff952fe97fc1f92bc99df7"
+  integrity sha512-X157D3YuX4yaC/yW6qn1zsCtLZuoaQPSj+cT9HZDiDOtrKuv51MyIHlWpnN1jihZ2N2cM7a1V6Oo7g3UJB3Fnw==
   dependencies:
     fast-deep-equal "^2.0.1"
     rfdc "^1.1.4"
 
-mobx-miniprogram-bindings@^2.1.4:
-  version "2.1.4"
-  resolved "https://registry.npmmirror.com/mobx-miniprogram-bindings/download/mobx-miniprogram-bindings-2.1.4.tgz#504929e946c50cbe5f32d9c870225ba272a1c282"
-  integrity sha1-UEkp6UbFDL5fMtnIcCJbonKhwoI=
+mobx-miniprogram-bindings@^2.1.5:
+  version "2.1.5"
+  resolved "https://registry.npmmirror.com/mobx-miniprogram-bindings/-/mobx-miniprogram-bindings-2.1.5.tgz#148a9e9bb47b7ef2b4bdc3786dff57666e33a2eb"
+  integrity sha512-2HuiQL5FPgoYJ8XIMdw5iD6XT61LtsujaGyizbN845iZcsLmrKZiF0dKd4jQTSuC/6rGozqqhcy0sDc7qcpjYQ==
   dependencies:
     "@types/wechat-miniprogram" "^3.4.0"
 
 mobx-miniprogram@^4.13.2:
   version "4.13.2"
-  resolved "https://registry.npmmirror.com/mobx-miniprogram/download/mobx-miniprogram-4.13.2.tgz#b72c03fd5ad1f1b9022c422f9c88a47d1e5f8868"
-  integrity sha1-tywD/VrR8bkCLEIvnIikfR5fiGg=
+  resolved "https://registry.npmmirror.com/mobx-miniprogram/-/mobx-miniprogram-4.13.2.tgz#b72c03fd5ad1f1b9022c422f9c88a47d1e5f8868"
+  integrity sha512-C3HtkqHCLKp35N2gXA80yFD6PNfSqwioPFmnjTQpBLrEqYm1F6yiWZ57CW+8FqgmR306mw6ZfsM5q7hSTHw8BQ==
+
+querystring@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.npmmirror.com/querystring/-/querystring-0.2.1.tgz#40d77615bb09d16902a85c3e38aa8b5ed761c2dd"
+  integrity sha512-wkvS7mL/JMugcup3/rMitHmd9ecIGd2lhFhK9N3UUQ450h66d1r3Y9nvXzQAW1Lq+wyx61k/1pfKS5KuKiyEbg==
 
 rfdc@^1.1.4:
   version "1.3.0"
-  resolved "https://registry.npmmirror.com/rfdc/download/rfdc-1.3.0.tgz#d0b7c441ab2720d05dc4cf26e01c89631d9da08b"
-  integrity sha1-0LfEQasnINBdxM8m4ByJYx2doIs=
+  resolved "https://registry.npmmirror.com/rfdc/-/rfdc-1.3.0.tgz#d0b7c441ab2720d05dc4cf26e01c89631d9da08b"
+  integrity sha512-V2hovdzFbOi77/WajaSMXk2OLm+xNIeQdMMuB7icj7bk6zi2F8GGAxigcnDFpJHbNyNcgyJDiP+8nOrY5cZGrA==

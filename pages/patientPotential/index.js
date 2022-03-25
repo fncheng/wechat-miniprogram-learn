@@ -4,7 +4,7 @@ import { getPdList } from '../../api/common'
 import {
   addCustomerInfo,
   addPotentialInfo,
-  getCompeList
+  getCompeList,
 } from '../../api/patientPotential'
 import { getCheckboxList } from '../../utils/common'
 Page({
@@ -18,9 +18,11 @@ Page({
     patientPot_sheet_show: false, // 新客户潜力信息弹窗
     isPatientUpdateDaily: false,
     hospitalName: '',
+    deptId: null, // 科室id
     deptName: '请选择科室',
     deptNames: [],
     deptNamesObjArray: [],
+    productId: null,
     product: '请选择产品',
     products: [],
     productsObjArray: [],
@@ -31,14 +33,16 @@ Page({
       deptName: '', // 客户所属科室名称
       customerName: '', // 客户名称
       sex: 1, // 性别(1男，0女)
-      productId: 100, // 产品id
+      productIds: null, // 产品id
       positionTitleId: 10003, // 职称id
       phone: '', // 客户手机号
       admPositionId: 1003, // 行政职务id
     },
+    jobTitleId: null,
     jobTitles: [], // 职称
     jobTitle: '请选择职称',
     jobTilesObjArray: [], // 用于存储职称的key-value对
+    admPositionId: null,
     admPosition: '请选择行政职务',
     admPositions: [],
     admPositionObjArray: [], // 用于存储行政职务的key-value对
@@ -233,15 +237,17 @@ Page({
     /** 提交之前先setData表单 */
     this.setData({
       ['addQuery.hospitalName']: this.data.hospitalName, // 医院名称
-      ['addQuery.deptName']: this.data.deptNamesObjArray[this.data.deptName]
-        ?.id, // 科室id
+      ['addQuery.deptId']: this.data.deptNamesObjArray[this.data.deptId]?.id, // 科室id
+      ['addQuery.deptName']: this.data.deptName, // 科室名称
       ['addQuery.customerName']: this.data.customerName, // 客户姓名
+      ['addQuery.productIds']: this.data.productsObjArray[this.data.productId]
+        ?.id, // 产品id
       ['addQuery.phone']: this.data.phone, // 客户手机号
       ['addQuery.admPositionId']: this.data.admPositionObjArray[
-        this.data.admPosition
+        this.data.admPositionId
       ]?.id, // 行政职务id
       ['addQuery.positionTitleId']: this.data.jobTilesObjArray[
-        this.data.jobTitle
+        this.data.jobTitleId
       ]?.id, // 职称id
       ['addQuery.patientCaseMark']: this.data.isPatientUpdateDaily ? '1' : '0', // 每日病例更新标识
     })

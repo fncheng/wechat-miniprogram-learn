@@ -1,0 +1,49 @@
+@import "./color.wxss";
+.van-button--primary {
+  background-color: #6278fe !important;
+  border-color: #6278fe !important;
+  border-radius: 0.38rem !important;
+  width: 100%;
+}
+
+van-button .btn-confirm {
+  background-color: #6278fe !important;
+  color: #fff;
+  border-radius: 0.5rem;
+}
+
+van-button .btn-cancel {
+  background-color: #fff;
+  color: #6278fe;
+  border: 0.06rem solid #6278fe;
+  border-radius: 0.5rem;
+}
+
+.van-action-sheet__description {
+  color: #6278fe !important;
+}
+
+.cell-border-bottom {
+  position: relative;
+}
+
+.cell-border-bottom::after {
+  position: absolute;
+  box-sizing: border-box;
+  content: " ";
+  pointer-events: none;
+  border-bottom: 1px solid rgba(51, 51, 51, 0.1);
+  left: 1rem;
+  right: 1rem;
+  bottom: 0;
+  transform: scaleY(0.5);
+}
+
+.pb-safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* checkbox选中颜色 */
+.van-checkbox__icon--checked {
+  background-color: #6278fe !important;
+}

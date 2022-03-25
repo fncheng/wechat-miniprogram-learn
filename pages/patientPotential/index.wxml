@@ -1,42 +1,80 @@
 <!--pages/patientPotential/index.wxml-->
 <view class="title flex justify-center items-center">编辑客户</view>
 
+<!-- 编辑客户 -->
 <view>
   <van-cell-group>
     <van-field custom-style="margin-top: 0.5rem" label="医院"
-      value="{{ patientPotQuery.hospitalName }}" placeholder="请输入用户名"
+      placeholder="请输入医院名称" model:value="{{ hospitalName }}"
       border="{{ true }}" />
-    <van-field custom-style="margin-top: 0.5rem" label="科室或处室"
-      value="{{ patientPotQuery.deptName }}" placeholder="请输入用户名"
-      border="{{ true }}" />
+    <van-cell custom-style="margin-top: 0.5rem" title="科室或处室"
+      border="{{ true }}" is-link arrow-direction="down">
+      <view>
+        <picker mode="selector" model:value="{{ deptName }}"
+          bindchange="onChangeDept" range="{{ deptNames }}" class="text-right">
+          {{ deptName }}
+        </picker>
+      </view>
+    </van-cell>
     <van-field custom-style="margin-top: 0.5rem" label="客户姓名*"
-      value="{{ patientPotQuery.customerName }}" placeholder="请输入用户名"
+      placeholder="请输入客户姓名" model:value="{{ customerName }}"
       border="{{ true }}" />
-    <van-cell custom-style="margin-top: 0.5rem" title="性别*" placeholder="请输入用户名"
-      value-class="text-left"
-      value="{{ patientPotQuery.sex === 1 ? '男' : '女' }}" border="{{ true }}"
-      is-link arrow-direction="down" bind:click="changeSex">
+    <van-cell custom-style="margin-top: 0.5rem" title="性别*"
+      value-class="text-right" value="{{ addQuery.sex === 1 ? '男' : '女' }}"
+      border="{{ true }}" is-link arrow-direction="down" bind:click="changeSex">
     </van-cell>
     <van-cell custom-style="margin-top: 0.5rem" title="产品*" border="{{ true }}"
-      is-link arrow-direction="down" bind:click="changeSex" />
-    <van-cell custom-style="margin-top: 0.5rem" title="职称*" value="请选择职称"
-      value-class="text-left" border="{{ true }}" is-link arrow-direction="down"
-      bind:click="changeSex" />
+      is-link arrow-direction="down">
+      <view>
+        <picker mode="selector" model:value="{{ product }}"
+          bindchange="onChangeProduct" range="{{ products }}"
+          class="text-right">
+          {{ product }}
+        </picker>
+      </view>
+    </van-cell>
+    <van-cell custom-style="margin-top: 0.5rem" title="职称*"
+      value-class="text-left" border="{{ true }}" is-link
+      arrow-direction="down">
+      <view>
+        <picker mode="selector" model:value="{{ jobTitle }}"
+          bindchange="onChangeJobTitle" range="{{ jobTitles }}"
+          class="text-right">
+          {{ jobTitle }}
+        </picker>
+      </view>
+    </van-cell>
     <van-field custom-style="margin-top: 0.5rem" label="联系方式"
-      value="{{ patientPotQuery.hospitalName }}" placeholder="请输入联系方式"
-      border="{{ true }}" />
+      model:value="{{ phone }}" placeholder="请输入联系方式" border="{{ true }}"
+      type="number" />
     <van-cell custom-style="margin-top: 0.5rem" title="行政职务" border="{{ true }}"
-      is-link arrow-direction="down" bind:click="changeSex" />
+      is-link arrow-direction="down">
+      <view>
+        <picker mode="selector" model:value="{{ admPosition }}"
+          bindchange="onChangeAdmPos" range="{{ admPositions }}"
+          class="text-right">
+          {{ admPosition }}
+        </picker>
+      </view>
+    </van-cell>
   </van-cell-group>
-  <view class="flex">
-    <van-checkbox value="{{true}}"></van-checkbox>
-    <text>每日病例更新医生</text>
+  <view class="flex px-4 mt-4">
+    <view class="flex flex-1 items-center">
+      <van-checkbox value="{{ isPatientUpdateDaily }}" shape="square"
+        bindchange="onChangeUpdateDaily">
+      </van-checkbox>
+      <text>每日病例更新医生</text>
+    </view>
+    <view class="flex-1">
+      <van-button type="default" plain
+        custom-class="w-full btn-cancel btn-add-pot" bind:click="addPatientPot">
+        新客户潜力信息维护
+      </van-button>
+    </view>
   </view>
   <view></view>
-  <view>
-    <van-button type="info" bind:click="addPatientPot">新客户潜力信息维护</van-button>
-  </view>
-  <view class="submit px-4">
+
+  <view class="submit px-4 mt-8">
     <van-button type="primary" bind:click="submitPatientPot">提交</van-button>
   </view>
 </view>
@@ -50,53 +88,57 @@
 <!-- 新客户潜力信息 -->
 <van-action-sheet show="{{ patientPot_sheet_show }}" description="新客户潜力信息">
   <view class="add-patient-modal flex flex-col px-4">
-    <view>
+    <view class="pr-2">
       <view
         class="font-medium h-10 leading-10 text-gray px-4 cell-border-bottom">
         潜力信息
       </view>
-      <van-field label-class="font-medium text-gray" label="月份"
-        value="{{ value }}" border="{{ true }}">
-        <view slot="input">
-          <text>{{ currentDate }}</text>
-          <van-icon name="calendar-o" />
+      <van-cell label-class="font-medium text-gray" title="月份"
+        value="{{ value }}" border="{{ true }}" value-class="text-right">
+        <view class="flex text-right">
+          <!-- <text>{{ currentDate }}</text>
+          <van-icon name="calendar-o" /> -->
+          <picker mode="date" fields="month" bindchange="onChangeMonth"
+            class="w-full">
+            {{ currentDate }}
+            <van-icon name="calendar-o" />
+          </picker>
         </view>
-      </van-field>
-      <van-field label="门诊天数" value="{{ patientPotInfo.outpatientNum }}"
-        placeholder="请输入用户名" border="{{ true }}">
+      </van-cell>
+      <van-field label="门诊天数" model:value="{{ outpatientNum }}"
+        border="{{ true }}" input-align="right" type="number">
         <view slot="right-icon">天</view>
       </van-field>
-      <van-field label="日门诊量" value="{{ patientPotInfo.dayOutpatientNum }}"
-        placeholder="请输入用户名" border="{{ true }}">
+      <van-field label="日门诊量" model:value="{{ dayOutpatientNum }}"
+        border="{{ true }}" type="number">
         <view slot="right-icon">例</view>
       </van-field>
-      <van-field label="门诊高血压患者比例" value="{{ patientPotInfo.outpatientEhRate }}"
-        placeholder="请输入用户名" border="{{ true }}">
+      <van-field label="门诊高血压患者比例" model:value="{{ outpatientEhRate }}"
+        border="{{ true }}">
         <view slot="right-icon">%</view>
       </van-field>
-      <van-field label="复诊周期" value="{{ patientPotInfo.againPeriod }}"
-        placeholder="请输入用户名" border="{{ true }}">
+      <van-field label="复诊周期" model:value="{{ againPeriod }}"
+        border="{{ true }}" type="number">
         <view slot="right-icon">周</view>
       </van-field>
-      <van-field label="床位数" value="{{ patientPotInfo.bedNum }}"
-        placeholder="请输入用户名" border="{{ true }}">
+      <van-field label="床位数" model:value="{{ bedNum }}" border="{{ true }}"
+        type="number">
         <view slot="right-icon">张</view>
       </van-field>
-      <van-field label="月度床位周转次数" value="{{ patientPotInfo.monthBedNum }}"
-        placeholder="请输入用户名" border="{{ true }}">
+      <van-field label="月度床位周转次数" model:value="{{ monthBedNum }}"
+        border="{{ true }}" type="number">
         <view slot="right-icon">次</view>
       </van-field>
-      <van-field label="高血压患者比例" value="{{ patientPotInfo.inpatientEhRate }}"
-        placeholder="请输入用户名" border="{{ true }}">
+      <van-field label="高血压患者比例" model:value="{{ inpatientEhRate }}"
+        border="{{ true }}">
         <view slot="right-icon">%</view>
       </van-field>
-      <van-field label="随访周期" value="{{ patientPotInfo.followPeriodNum }}"
-        placeholder="请输入用户名" border="{{ true }}">
+      <van-field label="随访周期" model:value="{{ followPeriodNum }}"
+        border="{{ true }}" bind:blur="onBlurField" type="number">
         <view slot="right-icon">周</view>
       </van-field>
-      <van-field label="病例管理潜力" value="{{ patientPotInfo.potentialValue }}"
-        placeholder="请输入用户名" border="{{ true }}">
-        <view slot="right-icon">天</view>
+      <van-field label="病例管理潜力" disabled value="{{ potentialValue }}"
+        border="{{ true }}">
       </van-field>
     </view>
     <view class="relative">
@@ -106,22 +148,37 @@
       </view>
       <view class="flex justify-end items-center h-10 cell-border-bottom">
         <text class="flex-1 text-center">竞品</text>
-        <text class="w-24 text-center">价格</text>
       </view>
       <view class="flex items-center h-10 cell-border-bottom">
         <text class="w-16 text-center">1</text>
-        <view class="flex-1">{{ patientPotInfo.competitionOne }}</view>
-        <view class="w-24 text-center">{{ patientPotInfo.priceOne }}</view>
+        <view class="flex-1 px-8">
+          <picker mode="selector" range="{{ drugNames }}"
+            model:value="{{ competitionOne }}" bindchange="onChangeCompeOne">
+            {{ competitionOne }}
+            <van-icon name="arrow-down"></van-icon>
+          </picker>
+        </view>
       </view>
       <view class="flex items-center h-10 cell-border-bottom">
         <text class="w-16 text-center">2</text>
-        <view class="flex-1">{{ patientPotInfo.competitionTwo }}</view>
-        <view class="w-24 text-center">{{ patientPotInfo.priceTwo }}</view>
+        <view class="flex-1 px-8">
+          <picker mode="selector" range="{{ drugNames }}"
+            model:value="{{ competitionTwo }}" bindchange="onChangeCompeTwo">
+            {{ competitionTwo }}
+            <van-icon name="arrow-down"></van-icon>
+          </picker>
+        </view>
       </view>
       <view class="flex items-center h-10 cell-border-bottom">
         <text class="w-16 text-center">3</text>
-        <view class="flex-1">{{ patientPotInfo.competitionThree}}</view>
-        <view class="w-24 text-center">{{ patientPotInfo.priceThree }}</view>
+        <view class="flex-1 px-8">
+          <picker mode="selector" range="{{ drugNames }}"
+            model:value="{{ competitionThree }}"
+            bindchange="onChangeCompeThree">
+            {{ competitionThree }}
+            <van-icon name="arrow-down"></van-icon>
+          </picker>
+        </view>
       </view>
     </view>
     <!-- 提交按钮 -->

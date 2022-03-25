@@ -1,14 +1,21 @@
+import { getMyPlanList, getSubPlanList, createXfPlan } from '../../api/xiefang'
+import { getCheckboxList } from '../../utils/common'
 // pages/xiefang/index.js
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    activeTab: '1',
+    activeTab: '0',
     show: true,
     cbx_fudao: [], // 辅导列
     create_xf_show: false, // 创建协访计划表单
     xf_target_show: false, // 协访目的弹框
+    xf_result_show: false, // 协访结果弹框
+    myPlanList: [], // 协访计划列表
+    subPlanList: [], // 下属的拜访计划
+    /** 拜访计划详情 */
+    bfPlanInfo: {},
     createXfQuery: {
       hospitalName: '', // 医院名称
       productName: '', // 产品名称
@@ -17,6 +24,9 @@ Page({
       goalCase: 100, // 目标病例
       planStartTime: '', // 拜访计划开始时间
     },
+    fudao_cbx_list: [],
+    check_cbx_list: [],
+    resolveProblem_cbx_list: [],
   },
   /**
    * @description: 修改tab栏
@@ -31,7 +41,11 @@ Page({
       cbx_fudao: e.detail,
     })
   },
-  createXf() {
+  /**
+   * @description: 创建协访计划，打开弹框，将拜访计划详情的数据传入modal
+   */
+  async createXf(e) {
+    console.log(e)
     this.setData({
       create_xf_show: true,
     })
@@ -41,18 +55,62 @@ Page({
       create_xf_show: false,
     })
   },
-  confrimXfPlan() {
-    this.setData({
-      create_xf_show: false,
-    })
+  /**
+   * 确认创建拜访计划
+   */
+  async confrimXfPlan() {
+    let res = await createXfPlan(this.data.createXfQuery)
+    if (res.data.code === 200) {
+      this.setData({
+        create_xf_show: false,
+      })
+    }
   },
   /**
    * @description: 协访目的
    */
-  setXfTarget() {
+  async setXfTarget() {
     this.setData({
       xf_target_show: true,
     })
+    let list = await getCheckboxList('SYNERGY_TUTORIAL')
+    let list2 = await getCheckboxList('SYNERGY_CHECK')
+    let list3 = await getCheckboxList('SYNERGY_PROBLEM')
+    this.setData({
+      fudao_cbx_list: list,
+      check_cbx_list: list2,
+      resolveProblem_cbx_list: list3,
+    })
+  },
+  /**
+   * @description: 跳转至协访结果
+   */
+  setXfResult() {
+    wx.navigateTo({
+      url: '/pages/xiefangResult/index',
+    })
+  },
+  /**
+   * 获取我的协访计划列表
+   */
+  async getXfListFn() {
+    let res = await getPlanList()
+    if (res.data.code === 200) {
+      this.setData({
+        myPlanList: res.data.data,
+      })
+    }
+  },
+  /**
+   * 获取下属的协访计划列表
+   */
+  async getSubPlanListFn() {
+    let res = await getSubPlanList()
+    if (res.data.code === 200) {
+      this.setData({
+        subPlanList: res.data.data,
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载

@@ -2,6 +2,13 @@ page {
   background-color: #F7FCFF;
 }
 
+/* mixin */
+.van-cell__value {
+  margin-right: 1rem;
+}
+
+/* mixin over */
+
 .van-search {
   padding-left: 10rpx !important;
   padding-right: 10rpx !important;

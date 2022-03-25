@@ -244,3 +244,10 @@
     </view>
   </view>
 </view>
+
+<view class="grid grid-cols-2 gap-x-4 px-4 mt-8">
+  <van-button custom-class="w-full btn-cancel" bind:click="cancelXfPlan">取消
+  </van-button>
+  <van-button custom-class="w-full btn-confirm" bind:click="confrimXfPlan">确认
+  </van-button>
+</view>

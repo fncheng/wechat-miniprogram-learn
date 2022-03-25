@@ -82,8 +82,51 @@ page {
   height: 75%;
 }
 
-/* rewrite */
+.actjoin-people-title {
+  width: 6rem !important;
+}
+
+.btn-text {
+  height: 1.75rem !important;
+}
+
+.btn-text-area {
+  width: 16rem !important;
+  margin-left: -10rem;
+}
+
+.table-header {
+  height: 3rem;
+  display: grid;
+  grid-template-columns: 50% 25% 25%;
+  justify-items: center;
+  align-items: center;
+}
+
+.table-body {
+  height: 2.5rem;
+  display: grid;
+  grid-template-columns: 50% 25% 25%;
+  justify-items: center;
+  align-items: center;
+}
+
+.bg-btn__primary {
+  /* padding-left: 0;
+  padding-right: 0; */
+  width: 2.75rem;
+  text-align: center;
+  background-color: #6278fe;
+  color: #fff;
+}
+
+
+/* mixin */
 .cell-border-bottom::after {
   left: 0;
   right: 0;
+}
+
+.van-search__content.van-search__content--square {
+  border-radius: 0.375rem;
 }

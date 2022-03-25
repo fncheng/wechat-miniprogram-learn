@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "新客户患者潜力审批",
   "usingComponents": {
     "van-action-sheet": "@vant/weapp/action-sheet/index",
     "van-button": "@vant/weapp/button/index",

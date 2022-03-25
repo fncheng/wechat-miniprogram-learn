@@ -1,0 +1,6 @@
+function stringify(val) {
+  return JSON.stringify(val)
+}
+module.exports = {
+  stringify: stringify,
+}

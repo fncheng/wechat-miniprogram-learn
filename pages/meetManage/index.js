@@ -1,13 +1,22 @@
 // pages/meetManage/index.js
 import dayjs from 'dayjs'
-import { getMeetingList, getVisitList } from '../../api/meetingManage'
-import { getConfigList } from '../../api/getConfigList'
+import {
+  getMeetingList,
+  getVisitList,
+  setMeetingFeedback,
+} from '../../api/meetingManage'
+import { getConfigList } from '../../api/common'
+import { getCheckboxList } from '../../utils/common'
 Page({
   /**
    * 页面的初始数据
    */
   data: {
     activeTab: 0,
+    searchString: '123',
+    test: {
+      searchString: '111',
+    },
     show: true,
     feedback_mdoal_show: false,
     actions: [
@@ -51,14 +60,30 @@ Page({
       3: '已反馈',
     },
     meeting_execute_show: false,
-    cbx_meetingExecute: ['1', '2'], // 会议中执行清单
+    cbx_meetingExecute: [], // 会议中执行清单
     meetingExecuteList: [], // 会议中执行清单菜单列表
     pd_idea_show: false,
+    /** 会议反馈 */
+    actualLaborCost: 100, // 实际劳务费用
+    actualMealsCost: 1000, // 实际餐费
+    meetingFeedback: {
+      actualMeetingTime: '', // 实际会议时间
+      meetingExecutorBillIds: '', // 会中执行清单ids
+      meetingExecutorBillNames: '', // 会中执行清单s
+      actualJoinMeetingPeopleIds: '', // 实际参会人员ids
+      actualJoinMeetingPeopleNames: '', // 实际参会人员s
+    },
+    planMeetingPList_show: false,
+    addMeetingPList_show: false,
+    cbx_planList: [], // 计划参会者checkbox
+    planMeetingPeopleList: [], // 计划参会者名单
   },
   onClose() {
     // this.setData({ show: false })
   },
-
+  onChangeSearch(e) {
+    console.log(e)
+  },
   onSelect(event) {
     // console.log(event.detail)
   },
@@ -70,16 +95,43 @@ Page({
   onFeedback() {
     this.setData({
       feedback_mdoal_show: true,
+      cbx_meetingExecute: [],
     })
   },
-  confrimMeetingFeedback() {
+  /**
+   * 提交会议执行反馈
+   */
+  async confrimMeetingFeedback() {
+    let date = this.data.currentDate.split('-').join('')
+    let checkboxList = this.data.cbx_meetingExecute.map((item) =>
+      JSON.parse(item)
+    )
+    console.log(checkboxList)
+    let ids = checkboxList.map((item) => item.id).join()
+    let names = checkboxList.map((item) => item.value).join()
+    this.setData({
+      ['meetingFeedback.actualMeetingTime']: date,
+      ['meetingFeedback.meetingExecutorBillIds']: ids,
+      ['meetingFeedback.meetingExecutorBillNames']: names,
+      ['meetingFeedback.actualLaborCost']: Number(this.data.actualLaborCost),
+      ['meetingFeedback.actualMealsCost']: Number(this.data.actualMealsCost),
+    })
     this.setData({
       feedback_mdoal_show: false,
     })
+    // let res = await setMeetingFeedback(this.data.meetingFeedback)
   },
   cancelMeetingFeedback() {
     this.setData({
       feedback_mdoal_show: false,
+    })
+  },
+  /**
+   * 修改会议实际时间
+   */
+  onChangeDate(e) {
+    this.setData({
+      currentDate: e.detail.value,
     })
   },
   /**
@@ -107,6 +159,30 @@ Page({
     console.log(e)
     this.setData({
       cbx_meetingExecute: e.detail,
+    })
+  },
+  /**
+   * 打开计划参会者名单dialog
+   */
+  onPlanMeetingPeople() {
+    this.setData({
+      planMeetingPList_show: true,
+    })
+  },
+  /**
+   * 新增参会者名单dialog
+   */
+  onAddMeetingPeople() {
+    this.setData({
+      addMeetingPList_show: true,
+    })
+  },
+  /**
+   * 计划参会者名单
+   */
+  onChangeMeetingPeople(e) {
+    this.setData({
+      cbx_planList: e.detail,
     })
   },
   /**
@@ -147,16 +223,10 @@ Page({
     //   currPage: 1,
     //   pageSize: 10,
     // })
-    let res = await getConfigList({ configName: 'MEETING_LISTING' })
-    if (res.data.code === 200) {
-      let meetingExecuteList = res.data.data.map((item) => ({
-        id: item.id,
-        value: item.configValue,
-      }))
-      this.setData({
-        meetingExecuteList,
-      })
-    }
+    let list = await getCheckboxList('MEETING_LISTING')
+    this.setData({
+      meetingExecuteList: list,
+    })
   },
 
   /**

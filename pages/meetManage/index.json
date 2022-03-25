@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "会议管理",
   "usingComponents": {
     "van-action-sheet": "@vant/weapp/action-sheet/index",
     "van-button": "@vant/weapp/button/index",
@@ -6,6 +7,7 @@
     "van-cell-group": "@vant/weapp/cell-group/index",
     "van-checkbox": "@vant/weapp/checkbox/index",
     "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+    "van-dialog": "@vant/weapp/dialog/index",
     "van-field": "@vant/weapp/field/index",
     "van-icon": "@vant/weapp/icon/index",
     "van-radio": "@vant/weapp/radio/index",

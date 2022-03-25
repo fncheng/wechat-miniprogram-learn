@@ -1,8 +1,7 @@
 <!--pages/patientPotentialApprove/index.wxml-->
-<van-tabs active="{{ active }}" bind:change="onChange">
-  <van-tab title="全部">全部</van-tab>
-  <van-tab title="未开始">未开始</van-tab>
-  <van-tab title="已反馈">已反馈</van-tab>
+<van-tabs active="{{ active }}" bind:change="onChangeTab">
+  <van-tab title="未审核" name="1"></van-tab>
+  <van-tab title="已审核" name="2"></van-tab>
 </van-tabs>
 
 <view>
@@ -13,16 +12,28 @@
   </van-search>
 </view>
 
+<!-- 潜力信息审批列表 -->
 <view>
-  <view class="flex flex-col justify-around px-3 py-2 meeting-card">
+  <view wx:for="{{ approveList }}"
+    class="flex flex-col justify-around px-3 py-2 meeting-card">
     <view class="flex justify-between">
-      <view class="meeting-org">复旦大学附属华山医院</view>
-      <view class="meeting-status">已提交</view>
+      <view class="meeting-org">{{ item.hospitalName }}</view>
+      <view class="meeting-status">
+        {{ item.approvalStatus === '1' ? '已提交' : '已审核' }}
+      </view>
     </view>
     <view class="flex justify-between">
-      <view class="meeting-time">3月3日 心内科 张主任 科室会</view>
-      <view class="meeting-action">
-        执行反馈
+      <view class="meeting-time">
+        <view>
+          销售代表：{{ item.delegateName }} 客户：{{ item.customerName }}
+        </view>
+        <view>
+          提交时间：{{ item.createdAt }}
+        </view>
+      </view>
+      <view class="meeting-action" data-item="{{ item }}"
+        bindtap="onApprovePot">
+        审批
       </view>
     </view>
   </view>
@@ -31,11 +42,101 @@
       <view class="meeting-org">复旦大学附属华山医院(依叶)</view>
       <view class="meeting-status">已审核</view>
     </view>
-    <view class="flex justify-between">
-      <view class="meeting-time">3月3日 心内科 张主任 科室会</view>
-      <view class="meeting-action">
+    <view class="flex justify-between items-center">
+      <view class="meeting-time">
+        <view>
+          销售代表：XX 客户：XX
+        </view>
+        <view>
+          提交时间：2022-02-12
+        </view>
+      </view>
+      <view class="meeting-action" data-item="{{ item }}"
+        bindtap="onApprovePot">
         审批
       </view>
     </view>
   </view>
 </view>
+
+<!-- 新客户潜力信息审批 -->
+<van-action-sheet show="{{ patientPot_sheet_show }}" description="新客户潜力信息">
+  <view class="add-patient-modal flex flex-col px-4">
+    <view>
+      <view
+        class="font-medium h-10 leading-10 text-gray px-4 cell-border-bottom">
+        潜力信息
+      </view>
+      <van-cell label-class="font-medium text-gray" title="月份"
+        value="{{ patientPotInfo.potentialMonth }}" border="{{ true }}">
+      </van-cell>
+      <van-cell title="门诊天数" value="{{ patientPotInfo.outpatientNum }}"
+        border="{{ true }}" input-align="right" type="number">
+        <view slot="right-icon">天</view>
+      </van-cell>
+      <van-cell title="日门诊量" value="{{ patientPotInfo.dayOutpatientNum }}"
+        border="{{ true }}" type="number">
+        <view slot="right-icon">例</view>
+      </van-cell>
+      <van-cell title="门诊高血压患者比例" value="{{ patientPotInfo.outpatientEhRate }}"
+        border="{{ true }}">
+        <view slot="right-icon">%</view>
+      </van-cell>
+      <van-cell title="复诊周期" value="{{ patientPotInfo.againPeriod }}"
+        border="{{ true }}" type="number">
+        <view slot="right-icon">周</view>
+      </van-cell>
+      <van-cell title="床位数" value="{{ patientPotInfo.bedNum }}"
+        border="{{ true }}" type="number">
+        <view slot="right-icon">张</view>
+      </van-cell>
+      <van-cell title="月度床位周转次数" value="{{ patientPotInfo.monthBedNum }}"
+        border="{{ true }}" type="number">
+        <view slot="right-icon">次</view>
+      </van-cell>
+      <van-cell title="高血压患者比例" value="{{ patientPotInfo.inpatientEhRate }}"
+        border="{{ true }}">
+        <view slot="right-icon">%</view>
+      </van-cell>
+      <van-cell title="随访周期" value="{{ patientPotInfo.followPeriodNum }}"
+        border="{{ true }}" bind:blur="onBlurField" type="number">
+        <view slot="right-icon">周</view>
+      </van-cell>
+      <van-cell title="病例管理潜力" disabled
+        value="{{ patientPotInfo.potentialValue }}" border="{{ true }}">
+      </van-cell>
+    </view>
+    <view class="relative">
+      <view
+        class="font-medium h-10 leading-10 text-gray px-4 cell-border-bottom">
+        竞品信息
+      </view>
+      <view class="flex justify-end items-center h-10 cell-border-bottom">
+        <text class="flex-1 text-center">竞品</text>
+      </view>
+      <view class="flex items-center h-10 cell-border-bottom">
+        <text class="w-16 text-center">1</text>
+        <view class="flex-1 px-8">{{ patientPotInfo.competitionOne }}</view>
+      </view>
+      <view class="flex items-center h-10 cell-border-bottom">
+        <text class="w-16 text-center">2</text>
+        <view class="flex-1 px-8">{{ patientPotInfo.competitionTwo }}</view>
+      </view>
+      <view class="flex items-center h-10 cell-border-bottom">
+        <text class="w-16 text-center">3</text>
+        <view class="flex-1 px-8">{{ patientPotInfo.competitionThree}}
+        </view>
+      </view>
+    </view>
+    <!-- 提交按钮 -->
+    <view class="grid grid-cols-2 gap-x-4 px-4 mt-16">
+      <van-button custom-class="w-full btn-cancel" bind:click="onApproveCancel">
+        取消
+      </van-button>
+      <van-button custom-class="w-full btn-confirm"
+        bind:click="onApproveConfirm">
+        审批通过
+      </van-button>
+    </view>
+  </view>
+</van-action-sheet>

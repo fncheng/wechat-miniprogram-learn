@@ -3,6 +3,28 @@ page {
   background-color: #F7FCFF;
 }
 
+/* mixin */
+van-button .btn-confirm {
+  background-color: #6278fe !important;
+  color: #fff;
+  border-radius: 0.5rem;
+}
+
+.van-field__label {
+  width: 8rem;
+}
+
+/* .van-field__body.van-field__body--text {
+  width: 6rem;
+} */
+input.van-field__control {
+  text-align: right;
+}
+
+.btn-add-pot {
+  height: 2.25rem !important;
+}
+
 .title {
   font-size: 1.13rem;
   line-height: 1.19rem;
@@ -29,8 +51,4 @@ van-cell {
 /* reset van-cell style */
 .van-cell__title {
   padding-left: 1rem;
-}
-
-.van-cell__value {
-  text-align: left !important;
 }

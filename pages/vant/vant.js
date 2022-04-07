@@ -1,6 +1,8 @@
+import { createToken } from '../../api/oss'
+import { MINIAPP_IMAGE_URL } from '../../config/index'
+
 // pages/vant/vant.js
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -11,20 +13,22 @@ Page({
     currentDate: new Date().getTime(),
     formatter(type, value) {
       if (type === 'year') {
-        return `${value}年`;
-      } 
+        return `${value}年`
+      }
       if (type === 'month') {
-        return `${value}月`;
+        return `${value}月`
       }
-      if (type==='day') {
-        return `${value}日`;
+      if (type === 'day') {
+        return `${value}日`
       }
-      return value;
+      return value
     },
     tips: '请稍后',
     show: true,
     animated: true,
     fileList: [],
+    sheetShow: false,
+    actions: [{ name: '男' }, { name: '女' }]
   },
 
   /**
@@ -44,9 +48,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-
-  },
+  onReady: function () {},
 
   /**
    * 生命周期函数--监听页面显示
@@ -62,9 +64,7 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-
-  },
+  onHide: function () {},
 
   /**
    * 生命周期函数--监听页面卸载
@@ -76,89 +76,100 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-
-  },
+  onPullDownRefresh: function () {},
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-
-  },
+  onReachBottom: function () {},
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  },
+  onShareAppMessage: function () {},
 
   showPopup() {
-    console.log('show');
-    this.setData({ show: true });
+    console.log('show')
+    this.setData({ show: true })
     // wx.showToast({
     //   title: '成功',
     //   icon: 'success',
     //   duration: 2000
     // })
   },
-
+  goToGlobal() {
+    wx.navigateTo({
+      url: '/pages/global/global'
+    })
+  },
   onClose() {
-    console.log('close');
-    this.setData({ show: false });
+    console.log('close')
+    this.setData({ show: false })
   },
   onInput(event) {
-    console.log('event: ', event);
+    console.log('event: ', event)
     this.setData({
-      currentDate: event.detail,
-    });
+      currentDate: event.detail
+    })
   },
-  bindDateChange(e){
-    console.log(123);
-    console.log('e: ', e);
+  bindDateChange(e) {
+    console.log(123)
+    console.log('e: ', e)
   },
 
-  bindClick(e){
-    console.log('e: ', e);
+  bindClick(e) {
+    console.log('e: ', e)
     wx.vibrateShort({
-      type:'heavy',
-      success: (res)=>{
-        console.log('振动成功',res);
+      type: 'heavy',
+      success: (res) => {
+        console.log('振动成功', res)
       },
-      fail(err){
-        console.log('振动失败',err);
+      fail(err) {
+        console.log('振动失败', err)
       }
     })
   },
-  bindChange(e){
-    console.log(123);
+  bindChange(e) {
+    console.log(123)
   },
-  bindLoading(e){
-    console.log(e);
+  bindLoading(e) {
+    console.log(e)
+  },
+  async afterRead(e) {
+    console.log('event: ', e)
+    let res = await createToken({
+      bucket: 'img',
+      isCover: '',
+      name: '1642399898088.jpeg',
+      size: 10676,
+      password: '',
+      userName: ''
+    })
+    if (res.data.code === 200) {
+      let ossToken = res.data.data
 
-  },
-  afterRead(e) {
-    console.log('event: ', e);
-    const { file } = e.detail;
-    // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
-    wx.uploadFile({
-      url: 'https://saas-dev.zy-health.net:7799/oss/file/storage', // 仅为示例，非真实的接口地址
-      filePath: file.url,
-      name: 'files',
-      header: {
-        token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyMjkiLCJpYXQiOjE2NDI0MDE3NTQsImV4cCI6MTY0MzAwNjU1NH0.ZDTG5jMxBA59S6bn13Jl3fN6RMdA92btTwqRT9-4EG999B6b2ksIxJvYqwMLB0YNXYPoqRHow38Sviw-pbtPSg',
-        deviceTag: 'app',
-        'content-type': 'multipart/form-data'
-      },
-      formData: { ossToken: '0c18380d9c25f3ed' },
-      success(res) {
-        console.log('res: ', res);
-        // 上传完成需要更新 fileList
-        const { fileList = [] } = this.data;
-        fileList.push({ ...file, url: res.data });
-        this.setData({ fileList });
-      },
-    });
-  },
+      const { file } = e.detail
+      // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
+      wx.uploadFile({
+        url: 'https://saas-pre.zy-health.net:7788/oss/file/storage', // 仅为示例，非真实的接口地址
+        filePath: file.url,
+        name: 'files',
+        header: {
+          token: wx.getStorageSync('token'),
+          deviceTag: 'app',
+          'content-type': 'multipart/form-data'
+        },
+        formData: { ossToken },
+        success: (res) => {
+          // console.log('res: ', res)
+          // 上传完成需要更新 fileList
+          const { fileList = [] } = this.data
+          const result = JSON.parse(res.data)
+          // console.log('res.data.msg: ', result.msg)
+          fileList.push({ ...file, url: `${MINIAPP_IMAGE_URL}/${result.msg}` })
+          this.setData({ fileList })
+        }
+      })
+    }
+  }
 })

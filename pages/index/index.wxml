@@ -8,40 +8,61 @@
       <open-data type="userNickName"></open-data>
     </block>
     <block wx:elif="{{!hasUserInfo}}">
-      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-      <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile">
+        获取头像昵称
+      </button>
+      <button
+        wx:elif="{{canIUse}}"
+        open-type="getUserInfo"
+        bindgetuserinfo="getUserInfo"
+      >
+        获取头像昵称
+      </button>
       <view wx:else> 请使用1.4.4及以上版本基础库 </view>
     </block>
     <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <image
+        bindtap="bindViewTap"
+        class="userinfo-avatar"
+        src="{{userInfo.avatarUrl}}"
+        mode="cover"
+      ></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
   </view>
-  <view >
+  <view>
     123
     <button bind:tap="handleClick">Button</button>
   </view>
-  <view >
-    <view >123</view>
-    <view >456</view>
-    <text >123</text>
-    <text >123</text>
+  <view>
+    <view>123</view>
+    <view>456</view>
+    <text>123</text>
+    <text>123</text>
   </view>
   <view>
-    <text >图片上传</text>
+    <text>图片上传</text>
     <button bind:tap="uploadImage">图片上传</button>
   </view>
-  <view >
-    <text >授权</text>
-    <button open-type="getUserInfo" bindgetuserinfo="getUserInfo">getUserInfo</button>
+  <view>
+    <text>授权</text>
+    <button open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+      getUserInfo
+    </button>
     <button bind:tap="getUserProfile">getUserProfile</button>
     <button bind:tap="getSetting">getSetting</button>
     <button open-type="openSetting">openSetting</button>
     <button bind:tap="login">login</button>
-    <button bind:tap="authorize">authorize</button>
+    <button bind:tap="authorize">wx.authorize</button>
+  </view>
+  <view>
+    <text>登录</text>
+    <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+      获取手机号
+    </button>
   </view>
   <view>
     <text>路由</text>
@@ -55,5 +76,12 @@
   <view>
     <text>发起请求</text>
     <button bind:tap="onClick">点击发起请求</button>
+  </view>
+  <view>
+    <text>录音</text>
+    <button bind:longpress="startRecord" bind:touchend="stopRecord">
+      {{ inputText }}
+    </button>
+    <text class="iconfont icon-yonghuduizhaozu"></text>
   </view>
 </view>

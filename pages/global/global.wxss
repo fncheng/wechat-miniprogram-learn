@@ -1,1 +1,9 @@
-/* pages/global/global.wxss */
+page {
+  height: 100%;
+}
+.body {
+  height: calc(100% - 30px);
+}
+.input {
+  padding-bottom: env(safe-area-inset-bottom);
+}

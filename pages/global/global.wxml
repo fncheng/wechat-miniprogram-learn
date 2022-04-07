@@ -1,10 +1,23 @@
 <!--pages/global/global.wxml-->
-<text>pages/global/global.wxml</text>
+<navigator style="height: 30px" delta="{{2}}" open-type="navigateBack">
+  1111
+</navigator>
+<navigation-bar></navigation-bar>
 
-<view>
-  <button bind:tap="bindClick">NavigationBarLoading</button>
-</view>
+<scroll-view style="height: calc(100% - 30px)">
+  <view class="body">
+    <text>pages/global/global.wxml</text>
+    <view>
+      <button bind:tap="bindClick">NavigationBarLoading</button>
+    </view>
 
-<view>
-  <button bind:tap="bindClick1">NavigationBarLoading</button>
-</view>
+    <view>
+      <button bind:tap="bindClick1">NavigationBarLoading</button>
+    </view>
+  </view>
+</scroll-view>
+<!-- <view class="input"> -->
+<com></com>
+<!-- <input class="input weui-input" auto-focus placeholder="将会获取焦点" /> -->
+<view class="input"></view>
+<!-- </view> -->
